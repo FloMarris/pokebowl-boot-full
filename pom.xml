@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>sopra.pokebowl</groupId>
-	<artifactId>pokebowl-boot</artifactId>
+	<artifactId>pokebowl-boot-full</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pokebowl-boot</name>
+	<name>pokebowl-boot-full</name>
 	<description>Pokebowl Boot</description>
 	<properties>
 		<java.version>11</java.version>
