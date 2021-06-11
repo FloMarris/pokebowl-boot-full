@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.createData;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class TestJUnitAPI {
 	@Test
 	public void createAllData() {
 		createPokeDataBase();
-		createAttaqueDataBase();
+		createAttaqueDataBase(); 
 	}
 	
 	public void createPokeDataBase() {

@@ -64,6 +64,14 @@ public class Tour {
 		super();
 	}
 	
+	public Tour(Action actionJoueur1, Action actionJoueur2, String attaquePokemon1, String attaquePokemon2) {
+		super();
+		this.actionJoueur1 = actionJoueur1;
+		this.actionJoueur2 = actionJoueur2;
+		this.attaquePokemon1 = attaquePokemon1;
+		this.attaquePokemon2 = attaquePokemon2;
+	}
+	
 	public Tour(Long id, Action actionJoueur1, Action actionJoueur2, String attaquePokemon1, String attaquePokemon2) {
 		super();
 		this.id = id;

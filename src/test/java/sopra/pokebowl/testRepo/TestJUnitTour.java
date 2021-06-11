@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
@@ -24,18 +24,18 @@ public class TestJUnitTour {
 	ITourRepository tourRepo;
 	@Autowired
 	ICombatRepository combatRepo;
-	@Autowired
+	@Autowired 
 	IPokemonMatchRepository pokemonMatchRepo;
 	
 	@Test
 	public void tourCreate() {
 		Combat combat = new Combat();
-		combat = combatRepo.save(combat);
+		combat = combatRepo.save(combat); 
 		
 		PokemonMatch pokemon1 = new PokemonMatch();
 		PokemonMatch pokemon2 = new PokemonMatch();
 		pokemon1 = pokemonMatchRepo.save(pokemon1);  
-		pokemon2 = pokemonMatchRepo.save(pokemon2);
+		pokemon2 = pokemonMatchRepo.save(pokemon2);  
 		
 		Tour tour = new Tour();
 		tour.setActionJoueur1(Action.ATTAQUER);
@@ -93,6 +93,8 @@ public class TestJUnitTour {
 	
 	@Test
 	public void tourFindAllAndDelete() {
+		int listSize = tourRepo.findAll().size();
+		
 		Tour tour1 = new Tour();
 		Tour tour2 = new Tour();
 		Tour tour3 = new Tour();
@@ -105,7 +107,7 @@ public class TestJUnitTour {
 		
 		List<Tour> tours = tourRepo.findAll();
 		
-		assertEquals(4, tours.size());  
+		assertEquals(listSize + 4, tours.size());  
 		tourRepo.delete(tour1);
 		tourRepo.delete(tour2);
 		tourRepo.delete(tour3);
@@ -113,6 +115,6 @@ public class TestJUnitTour {
 		
 		tours = tourRepo.findAll();
 		
-		assertEquals(0, tours.size());
+		assertEquals(listSize, tours.size());
 	}
 }

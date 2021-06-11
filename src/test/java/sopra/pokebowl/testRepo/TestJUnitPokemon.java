@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
@@ -23,29 +23,31 @@ public class TestJUnitPokemon {
 	
 	@Autowired
 	IPokemonRepository pokemonRepo;
-	@Autowired
+	@Autowired 
 	ITypeClassRepository typeClassRepo;
 	@Autowired
 	IAttaqueRepository attaqueRepo;
 	
 	@Test
 	public void pokemonFindAllAndDelete() {		
+		int listSize = pokemonRepo.findAll().size();
+		
 		Pokemon p1 = new Pokemon();
-		Pokemon p2 = new Pokemon();
+		Pokemon p2 = new Pokemon(); 
 		
 		p1 = pokemonRepo.save(p1);
 		p2 = pokemonRepo.save(p2);
 		
 		List<Pokemon> list = pokemonRepo.findAll();
 		
-		assertEquals(2, list.size());
+		assertEquals(listSize + 2, list.size());
 		
 		pokemonRepo.delete(p1);
 		pokemonRepo.delete(p2);
 		
 		list = pokemonRepo.findAll();
 		
-		assertEquals(0, list.size());
+		assertEquals(listSize, list.size());
 		
 	}
 	
@@ -152,6 +154,8 @@ public class TestJUnitPokemon {
 	
 	@Test
 	public void pokemonFindAllPokemonByType() {
+		int listSize = pokemonRepo.findAllPokemonByType(TypeEnum.PLANTE, TypeEnum.POISON).size();
+		
 		String nom = "Bulbizarre";
 		Integer hp = 200;
 		Integer attaque = 92;
@@ -218,7 +222,7 @@ public class TestJUnitPokemon {
 		
 		List<Pokemon> pokemons = pokemonRepo.findAllPokemonByType(TypeEnum.PLANTE, TypeEnum.POISON);
 		
-		assertEquals(2, pokemons.size());
+		assertEquals(listSize + 2, pokemons.size());
 		
 		pokemonRepo.delete(p); 
 		pokemonRepo.delete(p2);

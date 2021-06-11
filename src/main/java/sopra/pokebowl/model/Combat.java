@@ -55,6 +55,10 @@ public class Combat {
 	public Combat() {
 		super();
 	}
+	public Combat(Long idUtilisateurGagnant) {
+		super();
+		this.idUtilisateurGagnant = idUtilisateurGagnant;
+	}
 	public Combat(Long id, Long idUtilisateurGagnant) {
 		super();
 		this.id = id;

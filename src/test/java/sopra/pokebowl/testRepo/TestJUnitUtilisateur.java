@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
@@ -25,9 +25,9 @@ public class TestJUnitUtilisateur {
 
 	@Test
 	public void utilisateurCreate() {
-		Statistique stats = new Statistique();
+		Statistique stats = new Statistique(); 
 		stats.setPokemonPrefere("Carapuce");
-		stats.setNbrVictoires(54);
+		stats.setNbrVictoires(54); 
 		stats.setNbrDefaites(34);
 		stats.setNbrPartiesJouees(stats.getNbrDefaites() + stats.getNbrVictoires());
 		
@@ -93,6 +93,8 @@ public class TestJUnitUtilisateur {
 	
 	@Test
 	public void utilisateurFindAllAndDelete() {		
+		int listSize = utilisateurRepo.findAll().size();
+		
 		Utilisateur utilisateur1 = new Utilisateur();
 		Utilisateur utilisateur2 = new Utilisateur();
 		Utilisateur utilisateur3 = new Utilisateur();
@@ -105,7 +107,7 @@ public class TestJUnitUtilisateur {
 		
 		List<Utilisateur> utilisateurs = utilisateurRepo.findAll();
 		
-		assertEquals(4, utilisateurs.size());
+		assertEquals(listSize + 4, utilisateurs.size());
 		
 		utilisateurRepo.delete(utilisateur1);
 		utilisateurRepo.delete(utilisateur2);  
@@ -114,7 +116,7 @@ public class TestJUnitUtilisateur {
 		
 		utilisateurs = utilisateurRepo.findAll();
 		
-		assertEquals(0, utilisateurs.size());    
+		assertEquals(listSize, utilisateurs.size());    
 	}
 	
 	@Test  

@@ -60,6 +60,13 @@ public class Equipe {
 		super();
 	}
 	
+	public Equipe(String nom, Boolean favorite, Integer nbrPokemons) {
+		super();
+		this.nom = nom;
+		this.favorite = favorite;
+		this.nbrPokemons = nbrPokemons;
+	}
+	
 	
 	public Equipe(Integer numero, String nom, Boolean favorite, Integer nbrPokemons, Utilisateur utilisateurEquipeSauv,
 			Utilisateur utilisateurDeniereEquipe, List<MonPokemon> listPokemons) {
