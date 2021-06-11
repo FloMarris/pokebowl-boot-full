@@ -3,11 +3,10 @@ package sopra.pokebowl;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Combat;
 import sopra.pokebowl.model.Equipe;
 import sopra.pokebowl.model.Salon;
@@ -17,6 +16,7 @@ import sopra.pokebowl.repository.IEquipeRepository;
 import sopra.pokebowl.repository.ISalonRepository;
 import sopra.pokebowl.repository.IUtilisateurRepository;
 
+@SpringBootTest
 public class TestJUnitCombat {
 	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 	
