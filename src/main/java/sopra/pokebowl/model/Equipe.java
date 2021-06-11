@@ -48,7 +48,7 @@ public class Equipe {
 	private Utilisateur utilisateurEquipeSauv;
 	@OneToOne(mappedBy="derniereEquipe")
 	@JsonView(Views.ViewEquipeDetail.class)
-	private Utilisateur utilisateurDeniereEquipe;
+	private Utilisateur utilisateurDerniereEquipe;
 	@OneToOne(mappedBy="equipeEnCours")
 	@JsonView(Views.ViewEquipeDetail.class)
 	private Utilisateur utilisateurEquipeEnCours;
@@ -69,7 +69,7 @@ public class Equipe {
 		this.favorite = favorite;
 		this.nbrPokemons = nbrPokemons;
 		this.utilisateurEquipeSauv = utilisateurEquipeSauv;
-		this.utilisateurDeniereEquipe = utilisateurDeniereEquipe;
+		this.utilisateurDerniereEquipe = utilisateurDeniereEquipe;
 		this.listPokemons = listPokemons;
 	}
 
@@ -118,12 +118,12 @@ public class Equipe {
 
 
 	public Utilisateur getUtilisateurDeniereEquipe() {
-		return utilisateurDeniereEquipe;
+		return utilisateurDerniereEquipe;
 	}
 
 
 	public void setUtilisateurDeniereEquipe(Utilisateur utilisateurDeniereEquipe) {
-		this.utilisateurDeniereEquipe = utilisateurDeniereEquipe;
+		this.utilisateurDerniereEquipe = utilisateurDeniereEquipe;
 	}
 
 
