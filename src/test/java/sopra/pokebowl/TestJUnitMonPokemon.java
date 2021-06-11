@@ -1,13 +1,14 @@
 package sopra.pokebowl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals; 
+
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.Equipe;
 import sopra.pokebowl.model.MonPokemon;
@@ -17,13 +18,20 @@ import sopra.pokebowl.repository.IEquipeRepository;
 import sopra.pokebowl.repository.IMonPokemonRepository;
 import sopra.pokebowl.repository.IPokemonRepository;
 
+@SpringBootTest
 public class TestJUnitMonPokemon {
-	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+	
+	@Autowired
+	IEquipeRepository equipeRepo; 
+	@Autowired
+	IMonPokemonRepository monPokeRepo;
+	@Autowired
+	IAttaqueRepository attaqueRepo;
+	@Autowired
+	IPokemonRepository pokeRepo;
 	
 	@Test
-	public void monPokeFindAllAndDelete() {
-		IMonPokemonRepository monPokeRepo = context.getBean(IMonPokemonRepository.class);
-		
+	public void monPokeFindAllAndDelete() {		
 		MonPokemon p1 = new MonPokemon();
 		MonPokemon p2 = new MonPokemon();
 		
@@ -32,39 +40,32 @@ public class TestJUnitMonPokemon {
 		
 		List<MonPokemon> list = monPokeRepo.findAll();
 		
-		Assert.assertEquals(2, list.size());
+		assertEquals(2, list.size());
 		
 		monPokeRepo.delete(p1);
 		monPokeRepo.delete(p2);
 		
 		list = monPokeRepo.findAll();
 		
-		Assert.assertEquals(0, list.size());
+		assertEquals(0, list.size());
 		
 	}
 	
 	@Test
 	public void monPokeFindById() {
-		IMonPokemonRepository monPokeRepo = context.getBean(IMonPokemonRepository.class);
-		
 		MonPokemon p1 = new MonPokemon();
 		p1.setOrdre(2);
 		p1 = monPokeRepo.save(p1);
 		
 		Optional<MonPokemon> p2 = monPokeRepo.findById(p1.getId());
 		
-		Assert.assertEquals((Integer)2, p2.get().getOrdre());
+		assertEquals((Integer)2, p2.get().getOrdre());
 		
 		monPokeRepo.delete(p1);
 	}
 	
 	@Test
 	public void monPokeCreate() {
-		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
-		IMonPokemonRepository monPokeRepo = context.getBean(IMonPokemonRepository.class);
-		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
-		IPokemonRepository pokeRepo = context.getBean(IPokemonRepository.class);
-		
 		MonPokemon p1 = new MonPokemon();
 		p1.setOrdre(1);
 		
@@ -92,13 +93,13 @@ public class TestJUnitMonPokemon {
 		
 		p1 = monPokeRepo.save(p1);
 	
-		Assert.assertEquals((Integer)1, p1.getOrdre());
-		Assert.assertEquals(e.getId(), p1.getEquipe().getId());
-		Assert.assertEquals(a1.getId(), p1.getAttaque1().getId());
-		Assert.assertEquals(a2.getId(), p1.getAttaque2().getId());
-		Assert.assertEquals(a3.getId(), p1.getAttaque3().getId());
-		Assert.assertEquals(a4.getId(), p1.getAttaque4().getId());
-		Assert.assertEquals(p.getId(), p1.getPokeReference().getId());
+		assertEquals((Integer)1, p1.getOrdre());
+		assertEquals(e.getId(), p1.getEquipe().getId());
+		assertEquals(a1.getId(), p1.getAttaque1().getId());
+		assertEquals(a2.getId(), p1.getAttaque2().getId());
+		assertEquals(a3.getId(), p1.getAttaque3().getId());
+		assertEquals(a4.getId(), p1.getAttaque4().getId());
+		assertEquals(p.getId(), p1.getPokeReference().getId());
 		
 		monPokeRepo.delete(p1);
 		pokeRepo.delete(p);
@@ -110,9 +111,7 @@ public class TestJUnitMonPokemon {
 	}
 	
 	@Test
-	public void monPokeUpdate() {
-		IMonPokemonRepository monPokeRepo = context.getBean(IMonPokemonRepository.class);
-		
+	public void monPokeUpdate() {		
 		MonPokemon p = new MonPokemon();
 		p.setOrdre(2);
 		p = monPokeRepo.save(p);
@@ -122,7 +121,7 @@ public class TestJUnitMonPokemon {
 		
 		Optional<MonPokemon> pFind = monPokeRepo.findById(p.getId());
 		
-		Assert.assertEquals((Integer)5, pFind.get().getOrdre());
+		assertEquals((Integer)5, pFind.get().getOrdre());
 	
 		monPokeRepo.delete(p); 
 	}

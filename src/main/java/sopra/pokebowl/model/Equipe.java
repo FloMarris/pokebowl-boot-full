@@ -49,6 +49,9 @@ public class Equipe {
 	@OneToOne(mappedBy="derniereEquipe")
 	@JsonView(Views.ViewEquipeDetail.class)
 	private Utilisateur utilisateurDeniereEquipe;
+	@OneToOne(mappedBy="equipeEnCours")
+	@JsonView(Views.ViewEquipeDetail.class)
+	private Utilisateur utilisateurEquipeEnCours;
 	@OneToMany(mappedBy="equipe")
 	@JsonView(Views.ViewEquipeDetail.class)
 	private List<MonPokemon> listPokemons = new ArrayList<MonPokemon>();
@@ -151,5 +154,12 @@ public class Equipe {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
+
+	public Utilisateur getUtilisateurEquipeEnCours() {
+		return utilisateurEquipeEnCours;
+	}
+
+	public void setUtilisateurEquipeEnCours(Utilisateur utilisateurEquipeEnCours) {
+		this.utilisateurEquipeEnCours = utilisateurEquipeEnCours;
+	}
 }
