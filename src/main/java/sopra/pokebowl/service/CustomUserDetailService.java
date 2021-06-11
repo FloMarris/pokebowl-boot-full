@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import sopra.pokebowl.model.Utilisateur;
 import sopra.pokebowl.repository.IUtilisateurRepository;
 
-
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 

@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous();
 			http.headers().frameOptions().disable();// à vérifier
 
-			http.authorizeRequests().antMatchers("/data-rest").permitAll().antMatchers("/**").authenticated().and()
+			http.authorizeRequests().antMatchers("/**").authenticated().and()
 					.httpBasic();
 		}
 
