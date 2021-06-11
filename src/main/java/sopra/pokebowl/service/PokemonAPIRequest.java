@@ -98,7 +98,7 @@ public class PokemonAPIRequest {
 		for (int j = 0; j <= pokemon.types.size() - 1; j++) {
 			LinkedHashMap<Object, Object> types = (LinkedHashMap<Object, Object>) pokemon.types.get(j);
 			LinkedHashMap<Object, Object> type = (LinkedHashMap<Object, Object>) types.get("type");
-			pokeInfo.put(typesString[j], (String) type.get("name"));
+			pokeInfo.put(typesString[j], ((String) type.get("name")).replace("\"", ""));
 			count++;
 		}
 

@@ -73,7 +73,7 @@ public class AttaqueAPIRequest {
 			attaqueInfo.put(precisionAttaque, attaque.accuracy);
 
 			// récupérer le type
-			attaqueInfo.put(typeAttaque, String.valueOf(attaque.type.get("name")));
+			attaqueInfo.put(typeAttaque, (String.valueOf(attaque.type.get("name")).replace("\"", "")));
 
 			// Utiliser une list de nom de pokemon faites avec les pokemons utilises
 			// Get Pokemons who can used Move			
@@ -94,10 +94,6 @@ public class AttaqueAPIRequest {
 					break;
 				}
 				
-			}
-			
-			if(!attaqueInfo.containsKey("description")){
-				attaqueInfo.put(descriptionAttaque, "No description.");
 			}
 		}
 

@@ -54,6 +54,7 @@ public class TestJUnitCreateFakeData {
 		utilisateur1.setEmail("jean.jojo@gmail.com");
 		utilisateur1.setAvatar("chemin/avatar");
 		utilisateur1.setMotDePasse("lesoleilbrille33");
+		utilisateur1.setEnable(true);
 		
 		UtilisateurRole u1Role = new UtilisateurRole();
 		u1Role.setRole(Role.ADMIN);
@@ -66,8 +67,15 @@ public class TestJUnitCreateFakeData {
 		utilisateur2.setEmail("alexis.dupond@hotmail.fr");
 		utilisateur2.setAvatar("disqueC/image/avatar4");
 		utilisateur2.setMotDePasse("unplusdeux++");
+		utilisateur2.setEnable(true);
 		
 		utilisateur2 = utilisateurRepo.save(utilisateur2);
+		
+		for(TypeEnum t : TypeEnum.values()) {
+			TypeClass type = new TypeClass();
+			type.setType(t);
+			type = typeClassRepo.save(type);
+		}
 		
 //		Salon salon = new Salon();
 //		salon.setNom("salon des bg");

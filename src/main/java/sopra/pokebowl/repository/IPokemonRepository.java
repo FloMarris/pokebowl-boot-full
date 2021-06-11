@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.MonPokemon;
 import sopra.pokebowl.model.Pokemon;
+import sopra.pokebowl.model.TypeClass;
 import sopra.pokebowl.model.TypeEnum;
 
 public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
@@ -27,6 +28,4 @@ public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
 	
 	@Query("select a from Attaque a inner join a.pokemons pa where pa.id = :idpoke")
 	List<Attaque> findAllAttaquesPokemonById(@Param("idpoke")Long id);
-	
-
 }
