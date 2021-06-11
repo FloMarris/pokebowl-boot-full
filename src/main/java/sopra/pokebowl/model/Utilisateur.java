@@ -2,6 +2,7 @@ package sopra.pokebowl.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -16,6 +17,7 @@ import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name = "utilisateur")
@@ -54,6 +56,9 @@ public class Utilisateur {
 	@OneToMany(mappedBy = "utilisateurEquipeSauv")
 	@JsonView(Views.ViewUtilisateurDetail.class)
 	private List<Equipe> equipesSauvegardees = new ArrayList<Equipe>();
+	private boolean enable;
+	@OneToMany(mappedBy = "user")
+	private Set<UtilisateurRole> roles;
 	
 	public Utilisateur() {
 		super();
@@ -147,4 +152,31 @@ public class Utilisateur {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public Set<UtilisateurRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UtilisateurRole> roles) {
+		this.roles = roles;
+	}
+	
+	public List<String> getStringRoles() {
+		List<String> stringRoles = new ArrayList<>();
+
+		for (UtilisateurRole role : roles) {
+			stringRoles.add("ROLE_" + role.getRole().name());
+		}
+
+		return stringRoles;
+	}
+	
 }
