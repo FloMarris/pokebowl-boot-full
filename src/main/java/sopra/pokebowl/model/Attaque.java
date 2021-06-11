@@ -26,7 +26,7 @@ public class Attaque {
 	private Long id;
 	@Version
 	@JsonView(Views.ViewAttaque.class)
-	private int version;
+	private int version; 
 	@Column(name="nom")
 	@JsonView(Views.ViewAttaque.class)
 	private String nom;

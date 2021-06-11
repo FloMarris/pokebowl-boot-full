@@ -47,6 +47,12 @@ public class Salon {
 		super();
 	}
 	
+	public Salon(String nom, String motDePasse) {
+		super();
+		this.nom = nom;
+		this.motDePasse = motDePasse;
+	}
+	
 	public Salon(Long id, String nom, String motDePasse) {
 		super();
 		this.id = id;

@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
@@ -22,7 +22,7 @@ import sopra.pokebowl.repository.IPokemonRepository;
 public class TestJUnitMonPokemon {
 	
 	@Autowired
-	IEquipeRepository equipeRepo; 
+	IEquipeRepository equipeRepo;  
 	@Autowired
 	IMonPokemonRepository monPokeRepo;
 	@Autowired
@@ -32,22 +32,24 @@ public class TestJUnitMonPokemon {
 	
 	@Test
 	public void monPokeFindAllAndDelete() {		
+		int listSize = monPokeRepo.findAll().size();
+		
 		MonPokemon p1 = new MonPokemon();
-		MonPokemon p2 = new MonPokemon();
+		MonPokemon p2 = new MonPokemon(); 
 		
 		p1 = monPokeRepo.save(p1);
 		p2 = monPokeRepo.save(p2);
 		
 		List<MonPokemon> list = monPokeRepo.findAll();
 		
-		assertEquals(2, list.size());
+		assertEquals(listSize + 2, list.size());
 		
 		monPokeRepo.delete(p1);
 		monPokeRepo.delete(p2);
 		
 		list = monPokeRepo.findAll();
 		
-		assertEquals(0, list.size());
+		assertEquals(listSize, list.size());
 		
 	}
 	

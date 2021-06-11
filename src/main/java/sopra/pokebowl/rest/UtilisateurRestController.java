@@ -49,7 +49,7 @@ public class UtilisateurRestController {
 	@JsonView(Views.ViewUtilisateur.class)
 	public Utilisateur find(@PathVariable Long id) {
 		Optional<Utilisateur> optUtilisateur = utilisateurRepo.findById(id);
-		
+		 
 		if(optUtilisateur.isPresent()) {
 			return optUtilisateur.get();
 		} else {

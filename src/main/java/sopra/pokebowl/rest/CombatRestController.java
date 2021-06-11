@@ -36,7 +36,7 @@ public class CombatRestController {
 	@GetMapping("")
 	@JsonView(Views.ViewCombat.class)
 	public List<Combat> findAll() {
-		return combatRepo.findAll();
+		return combatRepo.findAll(); 
 	}
 	
 	@GetMapping("/{id}")

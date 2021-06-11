@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
@@ -21,22 +21,24 @@ public class TestJUnitTypeClass {
 	
 	@Test
 	public void typeClassFindAllAndDelete() {
-		TypeClass t1 = new TypeClass();
+		int listSize = typeClassRepo.findAll().size(); 
+		
+		TypeClass t1 = new TypeClass(); 
 		TypeClass t2 = new TypeClass();
 		
 		t1 = typeClassRepo.save(t1);
 		t2 = typeClassRepo.save(t2);
-		
+		 
 		List<TypeClass> list = typeClassRepo.findAll();
 		
-		assertEquals(2, list.size());
+		assertEquals(listSize + 2, list.size());
 		
 		typeClassRepo.delete(t1);
 		typeClassRepo.delete(t2);
 		
 		list = typeClassRepo.findAll();
 		
-		assertEquals(0, list.size());
+		assertEquals(listSize, list.size());
 		
 	}
 	

@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
@@ -18,16 +18,16 @@ import sopra.pokebowl.repository.IUtilisateurRepository;
 public class TestJUnitSalon {
 	
 	@Autowired
-	ISalonRepository salonRepo; 
+	ISalonRepository salonRepo;  
 	@Autowired
 	IUtilisateurRepository utilisateurRepo;
 	
 	@Test
 	public void salonCreate() { 
-		Utilisateur joueur1 = new Utilisateur(); 
+		Utilisateur joueur1 = new Utilisateur();   
 		Utilisateur joueur2 = new Utilisateur();
 		joueur1 = utilisateurRepo.save(joueur1); 
-		joueur2 = utilisateurRepo.save(joueur2);    
+		joueur2 = utilisateurRepo.save(joueur2);     
 		
 		Salon salon = new Salon();
 		salon.setNom("salon des bg");
@@ -71,20 +71,22 @@ public class TestJUnitSalon {
 	}   
 	
 	@Test
-	public void salonFindAllAndDelete() {		
+	public void salonFindAllAndDelete() {
+		int listSize = salonRepo.findAll().size();
+		
 		Salon salon1 = new Salon(); 
 		Salon salon2 = new Salon();
 		Salon salon3 = new Salon();
 		Salon salon4 = new Salon();
 		
-		salon1 = salonRepo.save(salon1);
+		salon1 = salonRepo.save(salon1); 
 		salon2 = salonRepo.save(salon2);
 		salon3 = salonRepo.save(salon3);
 		salon4 = salonRepo.save(salon4);
 		
 		List<Salon> salons = salonRepo.findAll();
 		
-		assertEquals(4, salons.size());
+		assertEquals(listSize + 4, salons.size());
 		
 		salonRepo.delete(salon1);
 		salonRepo.delete(salon2);
@@ -93,7 +95,7 @@ public class TestJUnitSalon {
 		
 		salons = salonRepo.findAll();
 		
-		assertEquals(0, salons.size());
+		assertEquals(listSize, salons.size());
 	}
 	
 	@Test

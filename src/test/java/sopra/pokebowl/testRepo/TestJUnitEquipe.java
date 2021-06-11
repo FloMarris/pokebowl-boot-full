@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,7 +18,7 @@ import sopra.pokebowl.repository.IMonPokemonRepository;
 import sopra.pokebowl.repository.IUtilisateurRepository;
 
 @SpringBootTest
-public class TestJUnitEquipe {
+public class TestJUnitEquipe { 
 	
 	@Autowired
 	IEquipeRepository equipeRepo;
@@ -29,6 +29,7 @@ public class TestJUnitEquipe {
 	
 	@Test
 	public void equipeFindAllAndDelete() {
+		int listSize = equipeRepo.findAll().size();
 		
 		Equipe e1 = new Equipe();
 		Equipe e2 = new Equipe();
@@ -38,14 +39,14 @@ public class TestJUnitEquipe {
 		
 		List<Equipe> list = equipeRepo.findAll();
 		
-		assertEquals(2, list.size());
+		assertEquals(listSize + 2, list.size());
 		
 		equipeRepo.delete(e1);
 		equipeRepo.delete(e2);
 		
 		list = equipeRepo.findAll();
 		
-		assertEquals(0, list.size());
+		assertEquals(listSize, list.size());
 		
 	}
 	
@@ -157,6 +158,8 @@ public class TestJUnitEquipe {
 		Utilisateur u3 = new Utilisateur();
 		u3 = utilRepo.save(u3);
 		
+		int listSize = equipeRepo.findEquipesByUtilisateurId(u1.getId()).get().size();
+		
 		e1.setUtilisateurEquipeSauv(u1);
 		e2.setUtilisateurEquipeSauv(u1);
 		e3.setUtilisateurEquipeSauv(u1);
@@ -173,7 +176,7 @@ public class TestJUnitEquipe {
 		
 		Optional<List<Equipe>> equipeU1 = equipeRepo.findEquipesByUtilisateurId(u1.getId());
 		
-		assertEquals(4, equipeU1.get().size());
+		assertEquals(listSize + 4, equipeU1.get().size());
 		
 		equipeRepo.delete(e1);
 		equipeRepo.delete(e2);

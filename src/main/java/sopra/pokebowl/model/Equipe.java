@@ -54,10 +54,17 @@ public class Equipe {
 	private Utilisateur utilisateurEquipeEnCours;
 	@OneToMany(mappedBy="equipe")
 	@JsonView(Views.ViewEquipeDetail.class)
-	private List<MonPokemon> listPokemons = new ArrayList<MonPokemon>();
+	private List<MonPokemon> listPokemons = new ArrayList<MonPokemon>(); 
 	
 	public Equipe() {
 		super();
+	}
+	
+	public Equipe(String nom, Boolean favorite, Integer nbrPokemons) {
+		super();
+		this.nom = nom;
+		this.favorite = favorite;
+		this.nbrPokemons = nbrPokemons;
 	}
 	
 	
