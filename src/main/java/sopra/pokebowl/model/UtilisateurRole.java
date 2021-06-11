@@ -16,7 +16,7 @@ public class UtilisateurRole {
 	@GeneratedValue
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name = "username")
+	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur user;
 	@Enumerated(EnumType.STRING)
 	private Role role;
