@@ -1,27 +1,29 @@
 package sopra.pokebowl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals; 
+
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Salon;
 import sopra.pokebowl.model.Utilisateur;
 import sopra.pokebowl.repository.ISalonRepository;
 import sopra.pokebowl.repository.IUtilisateurRepository;
 
+@SpringBootTest
 public class TestJUnitSalon {
-	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-
+	
+	@Autowired
+	ISalonRepository salonRepo; 
+	@Autowired
+	IUtilisateurRepository utilisateurRepo;
+	
 	@Test
-	public void salonCreate() {
-		
-		ISalonRepository salonRepo = context.getBean(ISalonRepository.class);   
-		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class); 
-		 
+	public void salonCreate() { 
 		Utilisateur joueur1 = new Utilisateur(); 
 		Utilisateur joueur2 = new Utilisateur();
 		joueur1 = utilisateurRepo.save(joueur1); 
@@ -37,10 +39,10 @@ public class TestJUnitSalon {
 	
 		Optional<Salon> salonFind = salonRepo.findById(salon.getId());
 		
-		Assert.assertEquals("salon des bg", salonFind.get().getNom());
-		Assert.assertEquals("32785654", salonFind.get().getMotDePasse());
-		Assert.assertEquals(joueur1.getId(), salonFind.get().getJoueur1().getId());   
-		Assert.assertEquals(joueur2.getId(), salonFind.get().getJoueur2().getId());
+		assertEquals("salon des bg", salonFind.get().getNom());
+		assertEquals("32785654", salonFind.get().getMotDePasse());
+		assertEquals(joueur1.getId(), salonFind.get().getJoueur1().getId());   
+		assertEquals(joueur2.getId(), salonFind.get().getJoueur2().getId());
 		
 		salonRepo.delete(salon);
 		utilisateurRepo.delete(joueur1);
@@ -48,9 +50,7 @@ public class TestJUnitSalon {
 	}
 	 
 	@Test
-	public void salonUpdate() {
-		ISalonRepository salonRepo = context.getBean(ISalonRepository.class);
-		
+	public void salonUpdate() {		
 		Salon salon = new Salon();
 		salon.setNom("salon des bg");
 		salon.setMotDePasse("32785654");
@@ -64,16 +64,14 @@ public class TestJUnitSalon {
 		
 		Optional<Salon> salonFind = salonRepo.findById(salon.getId());
 		
-		Assert.assertEquals("salon numéro 3", salonFind.get().getNom());
-		Assert.assertEquals("998765411", salonFind.get().getMotDePasse());
+		assertEquals("salon numéro 3", salonFind.get().getNom());
+		assertEquals("998765411", salonFind.get().getMotDePasse());
 		
 		salonRepo.delete(salon);
 	}   
 	
 	@Test
-	public void salonFindAllAndDelete() {
-		ISalonRepository salonRepo = context.getBean(ISalonRepository.class);
-		
+	public void salonFindAllAndDelete() {		
 		Salon salon1 = new Salon(); 
 		Salon salon2 = new Salon();
 		Salon salon3 = new Salon();
@@ -86,7 +84,7 @@ public class TestJUnitSalon {
 		
 		List<Salon> salons = salonRepo.findAll();
 		
-		Assert.assertEquals(4, salons.size());
+		assertEquals(4, salons.size());
 		
 		salonRepo.delete(salon1);
 		salonRepo.delete(salon2);
@@ -95,13 +93,11 @@ public class TestJUnitSalon {
 		
 		salons = salonRepo.findAll();
 		
-		Assert.assertEquals(0, salons.size());
+		assertEquals(0, salons.size());
 	}
 	
 	@Test
-	public void salonFindSalonWithMDP() {
-		ISalonRepository salonRepo = context.getBean(ISalonRepository.class);
-		
+	public void salonFindSalonWithMDP() {		
 		Salon s1 = new Salon();
 		s1.setNom("salon 1");
 		s1.setMotDePasse("lesoleildusud3344");
@@ -119,7 +115,7 @@ public class TestJUnitSalon {
 		
 		Salon salonFind = salonRepo.findSalonWithMDP("56738273UVGHSGwvxf232");
 		
-		Assert.assertEquals(s2.getId(), salonFind.getId());
+		assertEquals(s2.getId(), salonFind.getId());
 		
 		salonRepo.delete(s1);
 		salonRepo.delete(s2);
