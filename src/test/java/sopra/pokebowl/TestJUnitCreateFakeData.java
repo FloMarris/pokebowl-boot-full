@@ -3,7 +3,6 @@ package sopra.pokebowl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import sopra.pokebowl.model.Action;
 import sopra.pokebowl.model.Combat;

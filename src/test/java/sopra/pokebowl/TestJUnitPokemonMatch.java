@@ -1,13 +1,14 @@
 package sopra.pokebowl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals; 
+
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Combat;
 import sopra.pokebowl.model.MonPokemon;
 import sopra.pokebowl.model.PokemonMatch;
@@ -16,15 +17,18 @@ import sopra.pokebowl.repository.ICombatRepository;
 import sopra.pokebowl.repository.IMonPokemonRepository;
 import sopra.pokebowl.repository.IPokemonMatchRepository;
 
+@SpringBootTest
 public class TestJUnitPokemonMatch {
-	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+	
+	@Autowired
+	IPokemonMatchRepository pokemonMatchRepo;
+	@Autowired
+	ICombatRepository combatRepo;
+	@Autowired
+	IMonPokemonRepository monPokemonRepo;
 	
 	@Test
 	public void pokemonMatchCreate() {
-		IPokemonMatchRepository pokemonMatchRepo = context.getBean(IPokemonMatchRepository.class);
-		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
-		IMonPokemonRepository monPokemonRepo = context.getBean(IMonPokemonRepository.class);
-		
 		MonPokemon monPokemon = new MonPokemon();
 		monPokemon = monPokemonRepo.save(monPokemon);
 		
@@ -51,20 +55,20 @@ public class TestJUnitPokemonMatch {
 		
 		Optional<PokemonMatch> pokemonMatchFind = pokemonMatchRepo.findById(pokemonMatch.getNumero());
 		
-		Assert.assertEquals(200, pokemonMatchFind.get().getHpMatch());
-		Assert.assertEquals(23, pokemonMatchFind.get().getAttackMatch());
-		Assert.assertEquals(5, pokemonMatchFind.get().getDefenseMatch());
-		Assert.assertEquals(78, pokemonMatchFind.get().getSpecialAttackMatch());
-		Assert.assertEquals(34, pokemonMatchFind.get().getSpecialDefenseMatch());
-		Assert.assertEquals(12, pokemonMatchFind.get().getSpeedMatch());
-		Assert.assertEquals(1, pokemonMatchFind.get().getNumAttaqueActive());
-		Assert.assertEquals(Statut.EMPOISONNE, pokemonMatchFind.get().getStatut());
-		Assert.assertEquals(4, pokemonMatchFind.get().getPpAttaque1());
-		Assert.assertEquals(3, pokemonMatchFind.get().getPpAttaque2());
-		Assert.assertEquals(0, pokemonMatchFind.get().getPpAttaque3());
-		Assert.assertEquals(12, pokemonMatchFind.get().getPpAttaque4());
-		Assert.assertEquals(combat.getId(), pokemonMatchFind.get().getCombat().getId());
-		Assert.assertEquals(monPokemon.getId(), pokemonMatchFind.get().getMonPokemon().getId());
+		assertEquals(200, pokemonMatchFind.get().getHpMatch());
+		assertEquals(23, pokemonMatchFind.get().getAttackMatch());
+		assertEquals(5, pokemonMatchFind.get().getDefenseMatch());
+		assertEquals(78, pokemonMatchFind.get().getSpecialAttackMatch());
+		assertEquals(34, pokemonMatchFind.get().getSpecialDefenseMatch());
+		assertEquals(12, pokemonMatchFind.get().getSpeedMatch());
+		assertEquals(1, pokemonMatchFind.get().getNumAttaqueActive());
+		assertEquals(Statut.EMPOISONNE, pokemonMatchFind.get().getStatut());
+		assertEquals(4, pokemonMatchFind.get().getPpAttaque1());
+		assertEquals(3, pokemonMatchFind.get().getPpAttaque2());
+		assertEquals(0, pokemonMatchFind.get().getPpAttaque3());
+		assertEquals(12, pokemonMatchFind.get().getPpAttaque4());
+		assertEquals(combat.getId(), pokemonMatchFind.get().getCombat().getId());
+		assertEquals(monPokemon.getId(), pokemonMatchFind.get().getMonPokemon().getId());
 		
 		pokemonMatchRepo.delete(pokemonMatch);
 		combatRepo.delete(combat);
@@ -72,9 +76,7 @@ public class TestJUnitPokemonMatch {
 	}
 	
 	@Test
-	public void pokemonMatchUpdate() {
-		IPokemonMatchRepository pokemonMatchRepo = context.getBean(IPokemonMatchRepository.class);
-		
+	public void pokemonMatchUpdate() {		
 		PokemonMatch pokemonMatch = new PokemonMatch();
 		pokemonMatch.setHpMatch(200);
 		pokemonMatch.setAttackMatch(23);
@@ -90,17 +92,15 @@ public class TestJUnitPokemonMatch {
 		
 		Optional<PokemonMatch> pokemonMatchFind = pokemonMatchRepo.findById(pokemonMatch.getNumero());
 		
-		Assert.assertEquals(120, pokemonMatchFind.get().getHpMatch());
-		Assert.assertEquals(15, pokemonMatchFind.get().getAttackMatch());
-		Assert.assertEquals(32, pokemonMatchFind.get().getDefenseMatch());
+		assertEquals(120, pokemonMatchFind.get().getHpMatch());
+		assertEquals(15, pokemonMatchFind.get().getAttackMatch());
+		assertEquals(32, pokemonMatchFind.get().getDefenseMatch());
 		
 		pokemonMatchRepo.delete(pokemonMatch);
 	}
 	
 	@Test
-	public void pokemonMatchFindAllAndDelete() {
-		IPokemonMatchRepository pokemonMatchRepo = context.getBean(IPokemonMatchRepository.class);
-		
+	public void pokemonMatchFindAllAndDelete() {		
 		PokemonMatch pokemonMatch1 = new PokemonMatch();
 		PokemonMatch pokemonMatch2 = new PokemonMatch();
 		PokemonMatch pokemonMatch3 = new PokemonMatch();   
@@ -113,7 +113,7 @@ public class TestJUnitPokemonMatch {
 		
 		List<PokemonMatch> pokemons = pokemonMatchRepo.findAll();
 		
-		Assert.assertEquals(4, pokemons.size());
+		assertEquals(4, pokemons.size());
 		
 		pokemonMatchRepo.delete(pokemonMatch1);
 		pokemonMatchRepo.delete(pokemonMatch2);
@@ -122,6 +122,6 @@ public class TestJUnitPokemonMatch {
 		
 		pokemons = pokemonMatchRepo.findAll();
 		
-		Assert.assertEquals(0, pokemons.size());
+		assertEquals(0, pokemons.size());
 	}
 }
