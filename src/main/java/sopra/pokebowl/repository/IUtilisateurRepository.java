@@ -18,4 +18,7 @@ public interface IUtilisateurRepository extends JpaRepository<Utilisateur, Long>
 	
 	@Query("select distinct u from Utilisateur u left join fetch u.equipesSauvegardees where u.id = :id ")
 	public Optional<Utilisateur> findUtilisateurByIdWithEquipesSauvegardees(@Param("id") Long id);
+	
+	@Query("select distinct u from Utilisateur u left join fetch u.roles where u.pseudo = :pseudo")
+	Optional<Utilisateur> findByIdWithRoles(@Param("pseudo") String pseudo);
 }
