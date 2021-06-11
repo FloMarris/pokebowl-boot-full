@@ -13,4 +13,10 @@ public interface IEquipeRepository extends JpaRepository<Equipe, Long> {
 	
 	@Query("select distinct e from Equipe e left join fetch e.listPokemons lp left join fetch lp.pokeReference p where e.utilisateurEquipeSauv.id = :idutil")
 	Optional<List<Equipe>> findEquipesByUtilisateurId(@Param("idutil") Long id);
+	
+	@Query("select distinct e from Equipe e left join fetch e.listPokemons lp left join fetch lp.pokeReference p where e.utilisateurDeniereEquipe.id = :idutil")
+	Optional<List<Equipe>> findEquipePrecedenteByUtilisateurId(@Param("idutil") Long id);
+	
+	@Query("select distinct e from Equipe e left join fetch e.listPokemons lp left join fetch lp.pokeReference p where e.utilisateurDeniereEquipe.id = :idutil")
+	Optional<List<Equipe>> findEquipeEnCoursByUtilisateurId(@Param("idutil") Long id);
 }
