@@ -28,5 +28,6 @@ public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
 	@Query("select a from Attaque a inner join a.pokemons pa where pa.id = :idpoke")
 	List<Attaque> findAllAttaquesPokemonById(@Param("idpoke")Long id);
 	
-
+	@Query("select p from Pokemon p where p.nom = :nom")
+	Pokemon findPokemonByNom(@Param("nom") String nom);
 }

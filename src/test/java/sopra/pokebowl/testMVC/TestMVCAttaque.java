@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,27 +20,49 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import sopra.pokebowl.model.Attaque;
+import sopra.pokebowl.model.CategorieAttaque;
 import sopra.pokebowl.repository.IAttaqueRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TestMVCAttaque {
 
-//	@Autowired 
-//	private MockMvc mockMvc;
-//	
-//	@Autowired
-//	private IAttaqueRepository attaqueRepo;
-//	
-//	@Test
-//	@WithUserDetails("admin")
-//	public void attaqueGet() throws Exception {
-//		mockMvc.perform(get("/attaque")).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
-//	}
-//	
-//	@Test
-//	@WithUserDetails("admin")
-//	public void attaquePost() throws Exception {
-//		Attaque attaque = 
-//	}
+	@Autowired 
+	private MockMvc mockMvc;
+	
+	@Autowired
+	private IAttaqueRepository attaqueRepo;
+	 
+	@Test
+	@WithUserDetails("pokemonator")
+	public void attaqueGet() throws Exception {
+		mockMvc.perform(get("/attaque")).andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+	} 
+	
+	@Test
+	@WithUserDetails("pokemonator")
+	public void attaqueGetById() throws Exception {
+		List<Attaque> attaques = attaqueRepo.findAll();
+		
+		if(attaques.size() != 0) {
+			Long id = attaques.get(0).getId();
+			mockMvc.perform(get("/attaque/" + id)).andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+		} 
+	}
+	
+	@Test
+	@WithUserDetails("pokemonator")
+	public void attaquePost() throws Exception {
+		Attaque attaque = new Attaque("attaque 1", CategorieAttaque.PHYSIQUE, 12, 34, 0.9f, "grosse attaque");
+	
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonAttaque = mapper.writeValueAsString(attaque);
+		
+		mockMvc.perform(post("/attaque").contentType(MediaType.APPLICATION_JSON).content(jsonAttaque))
+		.andExpect(status().isOk()).andExpect(jsonPath("$.id", is(notNullValue())))
+		.andExpect(jsonPath("$.version").value(0)).andExpect(jsonPath("$.description").value("grosse attaque"));
+	}
 }

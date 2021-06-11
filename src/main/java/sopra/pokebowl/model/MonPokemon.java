@@ -65,7 +65,7 @@ public class MonPokemon {
 		this.equipe = equipe;
 		this.pokeReference = pokeReference;
 		this.attaque1 = attaque1;
-		this.attaque2 = attaque2;
+		this.attaque2 = attaque2; 
 		this.attaque3 = attaque3;
 		this.attaque4 = attaque4;
 	}
