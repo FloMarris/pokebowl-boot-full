@@ -61,6 +61,7 @@ public class PokemonRestController {
 	@GetMapping("/by-types/{type1}")
 	@JsonView(Views.ViewPokemon.class)
 	public List<Pokemon> findAllPokemonsByType(@PathVariable TypeEnum type1) {
+		System.out.println(type1.toString());
 		return pokemonRepo.findAllPokemonByType(type1);
 	}
 	
