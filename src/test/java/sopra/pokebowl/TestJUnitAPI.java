@@ -69,6 +69,7 @@ public class TestJUnitAPI {
 				Map<String, String> pokemonInfo = PokemonAPIRequest.createInfoPokemon(i, null, listPoke);
 				Pokemon pokemon = new Pokemon();
 				pokemon.setNom(pokemonInfo.get(PokemonAPIRequest.nomPoke));
+				pokemon.setEnName(pokemonInfo.get(PokemonAPIRequest.nomPokeEN));
 				pokemon.setHp(Integer.parseInt(pokemonInfo.get(PokemonAPIRequest.hpPoke)));
 				pokemon.setAttaque(Integer.parseInt(pokemonInfo.get(PokemonAPIRequest.attaquePoke)));
 				pokemon.setDefense(Integer.parseInt(pokemonInfo.get(PokemonAPIRequest.defensePoke)));
@@ -91,9 +92,9 @@ public class TestJUnitAPI {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void createAttaqueDataBase() {
-			
+		
 		try {
 			for(int i = 1; i <= numberAttaqueToUse; i++) {
 				Map<String, String> attaqueInfo = AttaqueAPIRequest.createAttaqueInfo(i, listPoke);
@@ -129,6 +130,18 @@ public class TestJUnitAPI {
 					}
 					
 					attaqueRepo.save(attaque);
+				
+					System.out.println("VALEUR : "+attaqueInfo.get(AttaqueAPIRequest.pokemonAttaque));
+					
+					String[] listPokeAyantAttaque = (attaqueInfo.get(AttaqueAPIRequest.pokemonAttaque)).split(",");
+					for(String s : listPokeAyantAttaque) {
+						System.out.println("ITEM : " + s);
+						Pokemon p = pokemonRepo.findByEnName(s);
+						if(p != null) {
+							p.getAttaques().add(attaque);
+							pokemonRepo.save(p);
+						}
+					}
 				}
 			}
 		} catch (IOException e) {

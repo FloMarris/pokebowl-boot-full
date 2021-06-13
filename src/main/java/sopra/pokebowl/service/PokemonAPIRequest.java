@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PokemonAPIRequest {
 	public static final String nomPoke = "nomPoke";
-	public static final String nomPokeFR = "nomPokeFR";
+	public static final String nomPokeEN = "nomPokeEN";
 	public static final String hpPoke = "hpPoke";
 	public static final String attaquePoke = "attaquePoke";
 	public static final String defensePoke = "defensePoke";
@@ -73,7 +73,7 @@ public class PokemonAPIRequest {
 		pokeInfo.put("id", pokemon.id);
 
 		// Get Pokemon name
-		// pokeInfo.put(nomPoke, pokemon.name);
+		pokeInfo.put(nomPokeEN, String.valueOf(pokemon.name));
 		
 		listPoke.add(pokemon.name);
 
@@ -107,18 +107,21 @@ public class PokemonAPIRequest {
 		}
 
 		// Get Pokemon avatar
-		pokeInfo.put(avatarPoke, String.valueOf(pokemon.sprites.get("front_default")));
+		pokeInfo.put(avatarPoke, (String.valueOf(pokemon.sprites.get("front_default"))).replace("\"", ""));
 		
+		
+		//Get Poekmon description
 		for(int j=pokemon2.flavor_text_entries.size()-1; j>=0; j--) {
 			if(String.valueOf(pokemon2.flavor_text_entries.get(j).get("language").get("name")).equals("\"fr\"")) {
-				pokeInfo.put(descriptionPoke, String.valueOf(pokemon2.flavor_text_entries.get(j).get("flavor_text")).replace("\\n", " "));
+				pokeInfo.put(descriptionPoke, (String.valueOf(pokemon2.flavor_text_entries.get(j).get("flavor_text")).replace("\\n", " ")).replace("\"", ""));
 				break;
 			}
 		}
 		
+		//Get Pokemon French name
 		for(JsonNode j : pokemon2.names) {
 			if((String.valueOf(j.get("language").get("name"))).equals("\"fr\"")) {
-				pokeInfo.put(nomPoke, String.valueOf(j.get("name")));
+				pokeInfo.put(nomPoke, (String.valueOf(j.get("name"))).replace("\"", ""));
 				break;
 			}
 		}

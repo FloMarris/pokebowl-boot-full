@@ -54,7 +54,7 @@ public class AttaqueAPIRequest {
 			// Get name
 			for(JsonNode j : attaque.names) {
 				if(String.valueOf(j.get("language").get("name")).equals("\"fr\"")) {
-					attaqueInfo.put(nomAttaque, String.valueOf(j.get("name")));
+					attaqueInfo.put(nomAttaque, (String.valueOf(j.get("name"))).replace("\"", ""));
 					break;
 				}
 			}
@@ -80,17 +80,17 @@ public class AttaqueAPIRequest {
 			StringBuilder pokemonMove = new StringBuilder();
 			for (int j = 0; j < attaque.learned_by_pokemon.size(); j++) {
 				JsonNode pokemon = attaque.learned_by_pokemon.get(j);
-				if (listPoke.contains(pokemon.get("name"))) {
-					pokemonMove.append(pokemon.get("name") + ", ");
+				if (listPoke.contains(String.valueOf(pokemon.get("name")).replace("\"", ""))) {
+					pokemonMove.append(String.valueOf(pokemon.get("name")).replace("\"", "") + ",");
 				}
 			}
-
+			
 			attaqueInfo.put(pokemonAttaque, String.valueOf(pokemonMove));
 			
 			//Get Description
-			for(JsonNode j : attaque.flavor_text_entries) {
-				if(String.valueOf(j.get("language").get("name")).equals("\"fr\"")) {
-					attaqueInfo.put(descriptionAttaque, (String.valueOf(j.get("flavor_text"))).replace("\\n", " "));
+			for(int j= attaque.flavor_text_entries.size()-1; j>=0; j--) {
+				if(String.valueOf(attaque.flavor_text_entries.get(j).get("language").get("name")).equals("\"fr\"")) {
+					attaqueInfo.put(descriptionAttaque, ((String.valueOf(attaque.flavor_text_entries.get(j).get("flavor_text"))).replace("\\n", " ")).replace("\"", ""));
 					break;
 				}
 				

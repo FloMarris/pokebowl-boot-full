@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -31,6 +32,10 @@ public class Pokemon {
 	@Column(name="nom")
 	@JsonView(Views.ViewCommon.class)
 	private String nom;
+	
+	@Column(name="name")
+	@JsonView(Views.ViewCommon.class)
+	private String enName;
 	
 	@Column(name="hp")
 	@JsonView(Views.ViewCommon.class)
@@ -76,7 +81,7 @@ public class Pokemon {
 	@JsonView(Views.ViewCommon.class)
 	private String description;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "attaque_id"))
 	@JsonView(Views.ViewPokemonDetail.class)
 	private List<Attaque> attaques = new ArrayList<Attaque>();
@@ -97,11 +102,12 @@ public class Pokemon {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pokemon(String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
+	public Pokemon(String nom, String enName, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
 			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
 			String description) {
 		super();
 		this.nom = nom;
+		this.enName = enName;
 		this.hp = hp;
 		this.attaque = attaque;
 		this.defense = defense;
@@ -312,5 +318,15 @@ public class Pokemon {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+
+	public String getEnName() {
+		return enName;
+	}
+
+	public void setEnName(String enName) {
+		this.enName = enName;
+	}
+	
+	
 	
 }
