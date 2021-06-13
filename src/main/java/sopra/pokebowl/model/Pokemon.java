@@ -97,7 +97,7 @@ public class Pokemon {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public Pokemon(String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
 			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
 			String description) {
@@ -313,5 +313,7 @@ public class Pokemon {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+
+	
 	
 }

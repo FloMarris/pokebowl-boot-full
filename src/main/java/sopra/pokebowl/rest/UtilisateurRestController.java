@@ -99,11 +99,40 @@ public class UtilisateurRestController {
 		utilisateurRepo.deleteById(id);
 	}
 	
+	// Dans page profil --> Afficher les sprites des pokemons de toutes les équipes sauvegardées
 	@GetMapping("/{id}/equipes")
 	@JsonView(Views.ViewEquipeDetail.class)
 	public List<Equipe> findAllEquipeByUtilisateur(@PathVariable Long id) {
 		
 		Optional<List<Equipe>> optUtilisateur = equipeRepo.findEquipesByUtilisateurId(id);
+		
+		if(optUtilisateur.isPresent()) {
+			return optUtilisateur.get();
+		}
+		else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
+	
+	@GetMapping("/{id}/equipePrecedente")
+	@JsonView(Views.ViewEquipeDetail.class)
+	public Equipe findEquipePrecedenteByUtilisateur(@PathVariable Long id) {
+		
+		Optional<Equipe> optUtilisateur = equipeRepo.findEquipePrecedenteByUtilisateurId(id);
+		
+		if(optUtilisateur.isPresent()) {
+			return optUtilisateur.get();
+		}
+		else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
+	
+	@GetMapping("/{id}/equipeEnCours")
+	@JsonView(Views.ViewEquipeDetail.class)
+	public Equipe findEquipeEnCoursByUtilisateur(@PathVariable Long id) {
+		
+		Optional<Equipe> optUtilisateur = equipeRepo.findEquipeEnCoursByUtilisateurId(id);
 		
 		if(optUtilisateur.isPresent()) {
 			return optUtilisateur.get();

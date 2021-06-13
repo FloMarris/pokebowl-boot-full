@@ -36,19 +36,19 @@ public class MonPokemon {
 	private Pokemon pokeReference;
 	@OneToOne
 	@JoinColumn(name="id_attaque1")
-	@JsonView(Views.ViewMonPokemonDetail.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	private Attaque attaque1;
 	@OneToOne
 	@JoinColumn(name="id_attaque2")
-	@JsonView(Views.ViewMonPokemonDetail.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	private Attaque attaque2;
 	@OneToOne
 	@JoinColumn(name="id_attaque3")
-	@JsonView(Views.ViewMonPokemonDetail.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	private Attaque attaque3;
 	@OneToOne
 	@JoinColumn(name="id_attaque4")
-	@JsonView(Views.ViewMonPokemonDetail.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	private Attaque attaque4;
 	@OneToOne(mappedBy="monPokemon")
 	@JsonView(Views.ViewMonPokemonDetail.class)
