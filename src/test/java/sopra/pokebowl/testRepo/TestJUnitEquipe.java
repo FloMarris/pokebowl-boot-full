@@ -191,4 +191,26 @@ public class TestJUnitEquipe {
 		
 		
 	}
+	
+	@Test
+	public void equipeFindEquipePrecedenteByUtilisateurId() {	
+		Equipe e1 = new Equipe();
+		e1 = equipeRepo.save(e1);
+		
+		Utilisateur u1 = new Utilisateur();
+			
+		
+		u1.setDerniereEquipe(e1);
+		u1 = utilRepo.save(u1);	
+		
+		
+		Optional<Equipe> equipeFind = equipeRepo.findEquipePrecedenteByUtilisateurId(u1.getId());
+		
+		assertEquals(e1.getId(), equipeFind.get().getId());
+
+		utilRepo.delete(u1);
+
+		equipeRepo.delete(e1);
+
+	}
 }

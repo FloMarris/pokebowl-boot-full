@@ -67,6 +67,7 @@ public class TestJUnitCreateFakeData {
 		utilisateur1.setAvatar("resources/images/avatar1.png");
 		utilisateur1.setMotDePasse("lesoleilbrille33");
 		utilisateur1.setStatistique(statistique1);
+		utilisateur1.setEnable(true);
 		utilisateur1 = utilisateurRepo.save(utilisateur1);
 		
 		UtilisateurRole u1Role = new UtilisateurRole(utilisateur1, Role.ADMIN);
