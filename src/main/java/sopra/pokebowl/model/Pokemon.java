@@ -33,10 +33,6 @@ public class Pokemon {
 	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	
-	@Column(name="name")
-	@JsonView(Views.ViewCommon.class)
-	private String enName;
-	
 	@Column(name="hp")
 	@JsonView(Views.ViewCommon.class)
 	private Integer hp;
@@ -107,25 +103,6 @@ public class Pokemon {
 			String description) {
 		super();
 		this.nom = nom;
-		this.hp = hp;
-		this.attaque = attaque;
-		this.defense = defense;
-		this.attaqueSpe = attaqueSpe;
-		this.defenseSpe = defenseSpe;
-		this.speed = speed;
-		this.taille = taille;
-		this.poids = poids;
-		this.generation = generation;
-		this.avatar = avatar;
-		this.description = description;
-	}
-
-	public Pokemon(String nom, String enName, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
-			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
-			String description) {
-		super();
-		this.nom = nom;
-		this.enName = enName;
 		this.hp = hp;
 		this.attaque = attaque;
 		this.defense = defense;
@@ -337,14 +314,6 @@ public class Pokemon {
 		this.version = version;
 	}
 
-	public String getEnName() {
-		return enName;
-	}
-
-	public void setEnName(String enName) {
-		this.enName = enName;
-	}
-	
 	
 	
 }

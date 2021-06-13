@@ -24,7 +24,7 @@ public class AttaqueAPIRequest {
 	
 	@SuppressWarnings("unlikely-arg-type")
 	public static Map<String, String> createAttaqueInfo(Integer i, Map<String, String> listPoke) throws IOException {
-		Map<String, String> attaqueInfo = new HashMap<String, String>();
+		Map<String, String> attaqueInfo = new HashMap<String, String>(); 
 		
 		String path = "https://pokeapi.co/api/v2/move/" + i;
 
@@ -78,7 +78,7 @@ public class AttaqueAPIRequest {
 			StringBuilder pokemonMove = new StringBuilder();
 			for (int j = 0; j < attaque.learned_by_pokemon.size(); j++) {
 				JsonNode pokemon = attaque.learned_by_pokemon.get(j);
-				if (listPoke.contains(String.valueOf(pokemon.get("name")).replace("\"", ""))) {
+				if (listPoke.containsKey(String.valueOf(pokemon.get("name")).replace("\"", ""))) {
 					pokemonMove.append(String.valueOf(pokemon.get("name")).replace("\"", "") + ",");
 				}
 			}
