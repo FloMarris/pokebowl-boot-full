@@ -46,8 +46,6 @@ public class PokemonRestController {
 		}
 	}
 	
-	//MARCHE JUSTE POUR 2 TYPES
-	//FAIRE POUR 1 TYPE QUI AFFICHE LES MONO ET DOUBLE TYPE
 	@GetMapping("/by-types/{type1}/{type2}")
 	@JsonView(Views.ViewPokemon.class)
 	public List<Pokemon> findAllPokemonsByTypes(@PathVariable TypeEnum type1, @PathVariable TypeEnum type2) {
