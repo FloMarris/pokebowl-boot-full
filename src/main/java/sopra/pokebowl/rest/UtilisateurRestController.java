@@ -127,6 +127,20 @@ public class UtilisateurRestController {
 		}
 	}
 	
+	@GetMapping("/{id}/equipeEnCours")
+	@JsonView(Views.ViewEquipeDetail.class)
+	public Equipe findEquipeEnCoursByUtilisateur(@PathVariable Long id) {
+		
+		Optional<Equipe> optUtilisateur = equipeRepo.findEquipeEnCoursByUtilisateurId(id);
+		
+		if(optUtilisateur.isPresent()) {
+			return optUtilisateur.get();
+		}
+		else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
+	
 	@PostMapping("/auth")
 	@JsonView(Views.ViewUtilisateur.class)
 	public Utilisateur findByPseudoAndMotDePasse(@RequestBody ConnexionDTO conn) {
