@@ -23,7 +23,7 @@ public class AttaqueAPIRequest {
 	public static final String pokemonAttaque = "pokemonAttaque";
 	
 	@SuppressWarnings("unlikely-arg-type")
-	public static Map<String, String> createAttaqueInfo(Integer i, List<String> listPoke) throws IOException {
+	public static Map<String, String> createAttaqueInfo(Integer i, Map<String, String> listPoke) throws IOException {
 		Map<String, String> attaqueInfo = new HashMap<String, String>();
 		
 		String path = "https://pokeapi.co/api/v2/move/" + i;
@@ -54,12 +54,14 @@ public class AttaqueAPIRequest {
 			// Get name
 			for(JsonNode j : attaque.names) {
 				if(String.valueOf(j.get("language").get("name")).equals("\"fr\"")) {
-					attaqueInfo.put(nomAttaque, String.valueOf(j.get("name")));
+					StringBuilder name = new StringBuilder(String.valueOf(j.get("name")));
+					name.deleteCharAt(0);
+					name.deleteCharAt(name.length() - 1);
+					attaqueInfo.put(nomAttaque, name.toString());
 					break;
 				}
 			}
 			
-
 			// Get Damage Class (catégorie attaque)
 			attaqueInfo.put(categorieAttaque, String.valueOf(attaque.damage_class.get("name")));
 
@@ -75,13 +77,17 @@ public class AttaqueAPIRequest {
 			// récupérer le type
 			attaqueInfo.put(typeAttaque, String.valueOf(attaque.type.get("name")));
 
-			// Utiliser une list de nom de pokemon faites avec les pokemons utilises
 			// Get Pokemons who can used Move			
 			StringBuilder pokemonMove = new StringBuilder();
 			for (int j = 0; j < attaque.learned_by_pokemon.size(); j++) {
 				JsonNode pokemon = attaque.learned_by_pokemon.get(j);
-				if (listPoke.contains(pokemon.get("name"))) {
-					pokemonMove.append(pokemon.get("name") + ", ");
+				
+				StringBuilder pokemonName = new StringBuilder(String.valueOf(pokemon.get("name")));
+				pokemonName.deleteCharAt(0);
+				pokemonName.deleteCharAt(pokemonName.length() - 1);
+				
+				if (listPoke.containsKey(pokemonName.toString())) {
+					pokemonMove.append(pokemonName.toString() + ",");
 				}
 			}
 
@@ -90,14 +96,13 @@ public class AttaqueAPIRequest {
 			//Get Description
 			for(JsonNode j : attaque.flavor_text_entries) {
 				if(String.valueOf(j.get("language").get("name")).equals("\"fr\"")) {
-					attaqueInfo.put(descriptionAttaque, (String.valueOf(j.get("flavor_text"))).replace("\\n", " "));
+					StringBuilder description = new StringBuilder((String.valueOf(j.get("flavor_text"))).replace("\\n", " "));
+					description.deleteCharAt(0);
+					description.deleteCharAt(description.length() - 1);
+					attaqueInfo.put(descriptionAttaque, description.toString());
 					break;
 				}
 				
-			}
-			
-			if(!attaqueInfo.containsKey("description")){
-				attaqueInfo.put(descriptionAttaque, "No description.");
 			}
 		}
 

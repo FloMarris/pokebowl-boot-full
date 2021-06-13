@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals; 
 
@@ -22,14 +22,14 @@ public class TestJUnitPokemonMatch {
 	
 	@Autowired
 	IPokemonMatchRepository pokemonMatchRepo;
-	@Autowired
+	@Autowired 
 	ICombatRepository combatRepo;
 	@Autowired
 	IMonPokemonRepository monPokemonRepo;
 	
 	@Test
 	public void pokemonMatchCreate() {
-		MonPokemon monPokemon = new MonPokemon();
+		MonPokemon monPokemon = new MonPokemon(); 
 		monPokemon = monPokemonRepo.save(monPokemon);
 		
 		Combat combat = new Combat();
@@ -100,7 +100,9 @@ public class TestJUnitPokemonMatch {
 	}
 	
 	@Test
-	public void pokemonMatchFindAllAndDelete() {		
+	public void pokemonMatchFindAllAndDelete() {	
+		int listSize = pokemonMatchRepo.findAll().size();
+		
 		PokemonMatch pokemonMatch1 = new PokemonMatch();
 		PokemonMatch pokemonMatch2 = new PokemonMatch();
 		PokemonMatch pokemonMatch3 = new PokemonMatch();   
@@ -113,7 +115,7 @@ public class TestJUnitPokemonMatch {
 		
 		List<PokemonMatch> pokemons = pokemonMatchRepo.findAll();
 		
-		assertEquals(4, pokemons.size());
+		assertEquals(listSize + 4, pokemons.size());
 		
 		pokemonMatchRepo.delete(pokemonMatch1);
 		pokemonMatchRepo.delete(pokemonMatch2);
@@ -122,6 +124,6 @@ public class TestJUnitPokemonMatch {
 		
 		pokemons = pokemonMatchRepo.findAll();
 		
-		assertEquals(0, pokemons.size());
+		assertEquals(listSize, pokemons.size());
 	}
 }

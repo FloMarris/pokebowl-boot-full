@@ -1,7 +1,9 @@
-package sopra.pokebowl;
+package sopra.pokebowl.createData;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +23,7 @@ import sopra.pokebowl.repository.IPokemonRepository;
 public class TestJUnitAPI {
 	public final Integer numberPokeToUse = 151;
 	public final Integer numberAttaqueToUse = 200;
-	public List<String> listPoke = new ArrayList<String>();
+	public Map<String, String> listPoke = new HashMap<String, String>();
 	
 	@Autowired
 	IPokemonRepository pokemonRepo;
@@ -31,7 +33,7 @@ public class TestJUnitAPI {
 	@Test
 	public void createAllData() {
 		createPokeDataBase();
-		createAttaqueDataBase();
+		createAttaqueDataBase(); 
 	}
 	
 	public void createPokeDataBase() {
@@ -65,6 +67,7 @@ public class TestJUnitAPI {
 		try {
 			for(int i = 1; i <= numberAttaqueToUse; i++) {
 				Map<String, String> attaqueInfo = AttaqueAPIRequest.createAttaqueInfo(i, listPoke);
+				
 				if(!attaqueInfo.isEmpty()) {
 					Attaque attaque = new Attaque();
 					
@@ -97,6 +100,18 @@ public class TestJUnitAPI {
 //					}
 					
 					attaqueRepo.save(attaque);
+					
+					String pokemonsAttaque = attaqueInfo.get(AttaqueAPIRequest.pokemonAttaque);
+					List<String> convertedPokemonsAttaque = Arrays.asList(pokemonsAttaque.split(",",-1));
+					
+					for(String s : convertedPokemonsAttaque) {
+						if(listPoke.containsKey(s)) {
+							Pokemon pokemon = pokemonRepo.findPokemonByNom(listPoke.get(s));
+							
+							pokemon.getAttaques().add(attaque);
+							pokemon = pokemonRepo.save(pokemon);
+						}
+					}
 				}
 			}
 		} catch (IOException e) {
