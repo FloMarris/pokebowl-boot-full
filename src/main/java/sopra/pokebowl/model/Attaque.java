@@ -23,35 +23,35 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Attaque {
 	@Id
 	@GeneratedValue
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private int version; 
 	@Column(name="nom")
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@Enumerated(EnumType.STRING)
 	@Column(name="categorie", length=20)
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private CategorieAttaque categorie;
 	@Column(name="pointDePouvoir")
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer pointDePouvoir;
 	@Column(name="puissance")
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer puissance;
 	@Column(name="precision_attaque")
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private Float precisionAttaque;
 	@Column(name="description", length = 255)
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private String description;
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "attaques")
 	private List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	@OneToOne
 	@JoinColumn(name = "type_attaque")
-	@JsonView(Views.ViewAttaqueDetail.class)
+	@JsonView(Views.ViewCommon.class)
 	private TypeClass typeAttaque;
 	
 	

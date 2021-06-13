@@ -93,5 +93,16 @@ public class EquipeRestController {
 	public void delete(@PathVariable Long id) {
 		equipeRepo.deleteById(id);
 	}
-
+	
+	@GetMapping("/{id}/parametres_avances")
+	@JsonView(Views.ViewEquipeDetail.class)
+	public Equipe findByIdWithPokemonsAndAttaques(@PathVariable long id){
+		Optional<Equipe> optEquipe = equipeRepo.findEquipeByIdWithMonPokePokemonAndAllAttaque(id);
+		
+		if (optEquipe.isPresent()) {
+			return optEquipe.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
 }

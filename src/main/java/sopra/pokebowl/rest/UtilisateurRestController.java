@@ -99,6 +99,7 @@ public class UtilisateurRestController {
 		utilisateurRepo.deleteById(id);
 	}
 	
+	// Dans page profil --> Afficher les sprites des pokemons de toutes les équipes sauvegardées
 	@GetMapping("/{id}/equipes")
 	@JsonView(Views.ViewEquipeDetail.class)
 	public List<Equipe> findAllEquipeByUtilisateur(@PathVariable Long id) {

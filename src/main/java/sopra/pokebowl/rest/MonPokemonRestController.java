@@ -93,5 +93,4 @@ public class MonPokemonRestController {
 	public void delete(@PathVariable Long id) {
 		monPokeRepo.deleteById(id);
 	}
-
 }
