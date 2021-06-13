@@ -1,14 +1,15 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.CategorieAttaque;
 import sopra.pokebowl.model.Pokemon;
@@ -18,12 +19,19 @@ import sopra.pokebowl.repository.IAttaqueRepository;
 import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.ITypeClassRepository;
 
-public class TestJUnitAttaque {
-	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+@SpringBootTest
+public class TestJUnitAttaque { 
+	
+	@Autowired
+	IAttaqueRepository attaqueRepo;
+	@Autowired
+	ITypeClassRepository typeClassRepo;
+	@Autowired
+	IPokemonRepository pokemonRepo;
 	
 	@Test
 	public void attaqueFindAllAndDelete() {
-		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
+		int listSize = attaqueRepo.findAll().size();
 		
 		Attaque a1 = new Attaque();
 		Attaque a2 = new Attaque();
@@ -33,24 +41,19 @@ public class TestJUnitAttaque {
 		
 		List<Attaque> list = attaqueRepo.findAll();
 		
-		Assert.assertEquals(2, list.size());
+		
+		assertEquals(listSize + 2, list.size());  
 		
 		attaqueRepo.delete(a1);
 		attaqueRepo.delete(a2);
 		
 		list = attaqueRepo.findAll();
 		
-		Assert.assertEquals(0, list.size());
-		
-		
+		assertEquals(listSize, list.size());
 	}
 	
 	@Test
 	public void attaqueCreate() {
-		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
-		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
-		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
-		
 		String nom = "Charge";
 		CategorieAttaque categorie = CategorieAttaque.PHYSIQUE;
 		Integer pointDePouvoir = 35;
@@ -88,14 +91,14 @@ public class TestJUnitAttaque {
 
 	
 		//Assert.assertEquals((Integer)5, p1.getId());
-		Assert.assertEquals("Charge", a1.getNom());
-		Assert.assertEquals(CategorieAttaque.PHYSIQUE, a1.getCategorie());
-		Assert.assertEquals((Integer)35, a1.getPointDePouvoir());
-		Assert.assertEquals((Integer)40, a1.getPuissance());
-		Assert.assertEquals((Float)100f, a1.getPrecisionAttaque());
-		Assert.assertEquals("Le lanceur charge l'ennemi et le percute de tout son poids.", a1.getDescription());
-		Assert.assertEquals(4, a1.getPokemons().size());
-		Assert.assertEquals(TypeEnum.NORMAL, a1.getTypeAttaque().getType());
+		assertEquals("Charge", a1.getNom());
+		assertEquals(CategorieAttaque.PHYSIQUE, a1.getCategorie());
+		assertEquals((Integer)35, a1.getPointDePouvoir());
+		assertEquals((Integer)40, a1.getPuissance());
+		assertEquals((Float)100f, a1.getPrecisionAttaque());
+		assertEquals("Le lanceur charge l'ennemi et le percute de tout son poids.", a1.getDescription());
+		assertEquals(4, a1.getPokemons().size());
+		assertEquals(TypeEnum.NORMAL, a1.getTypeAttaque().getType());
 		
 		attaqueRepo.delete(a1);
 		pokemonRepo.delete(p4);
@@ -107,9 +110,7 @@ public class TestJUnitAttaque {
 	}
 	
 	@Test
-	public void attaqueUpdate() {
-		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
-		
+	public void attaqueUpdate() {		
 		String nom = "Charge";
 		CategorieAttaque categorie = CategorieAttaque.PHYSIQUE;
 		Integer pointDePouvoir = 35;
@@ -126,9 +127,8 @@ public class TestJUnitAttaque {
 		
 		Optional<Attaque> pFind = attaqueRepo.findById(a.getId());
 		
-		Assert.assertEquals((Integer)34, pFind.get().getPointDePouvoir());
+		assertEquals((Integer)34, pFind.get().getPointDePouvoir());
 	
 		attaqueRepo.delete(a);
-		
 	}
 }

@@ -1,13 +1,14 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
+
+import static org.junit.jupiter.api.Assertions.assertEquals; 
 
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Action;
 import sopra.pokebowl.model.Combat;
 import sopra.pokebowl.model.PokemonMatch;
@@ -16,22 +17,25 @@ import sopra.pokebowl.repository.ICombatRepository;
 import sopra.pokebowl.repository.IPokemonMatchRepository;
 import sopra.pokebowl.repository.ITourRepository;
 
+@SpringBootTest
 public class TestJUnitTour {
-	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-
+	
+	@Autowired
+	ITourRepository tourRepo;
+	@Autowired
+	ICombatRepository combatRepo;
+	@Autowired 
+	IPokemonMatchRepository pokemonMatchRepo;
+	
 	@Test
 	public void tourCreate() {
-		ITourRepository tourRepo = context.getBean(ITourRepository.class);
-		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
-		IPokemonMatchRepository pokemonMatchRepo = context.getBean(IPokemonMatchRepository.class);
-		
 		Combat combat = new Combat();
-		combat = combatRepo.save(combat);
+		combat = combatRepo.save(combat); 
 		
 		PokemonMatch pokemon1 = new PokemonMatch();
 		PokemonMatch pokemon2 = new PokemonMatch();
 		pokemon1 = pokemonMatchRepo.save(pokemon1);  
-		pokemon2 = pokemonMatchRepo.save(pokemon2);
+		pokemon2 = pokemonMatchRepo.save(pokemon2);  
 		
 		Tour tour = new Tour();
 		tour.setActionJoueur1(Action.ATTAQUER);
@@ -46,13 +50,13 @@ public class TestJUnitTour {
 		
 		Optional<Tour> tourFind = tourRepo.findById(tour.getId());
 		
-		Assert.assertEquals(Action.ATTAQUER, tourFind.get().getActionJoueur1());
-		Assert.assertEquals(Action.CHANGER, tourFind.get().getActionJoueur2());
-		Assert.assertEquals("Abattage", tourFind.get().getAttaquePokemon1());
-		Assert.assertEquals("Abîme", tourFind.get().getAttaquePokemon2());
-		Assert.assertEquals(combat.getId(), tourFind.get().getCombat().getId());
-		Assert.assertEquals(pokemon1.getNumero(), tourFind.get().getPokemonMatch1().getNumero());
-		Assert.assertEquals(pokemon2.getNumero(), tourFind.get().getPokemonMatch2().getNumero());  
+		assertEquals(Action.ATTAQUER, tourFind.get().getActionJoueur1());
+		assertEquals(Action.CHANGER, tourFind.get().getActionJoueur2());
+		assertEquals("Abattage", tourFind.get().getAttaquePokemon1());
+		assertEquals("Abîme", tourFind.get().getAttaquePokemon2());
+		assertEquals(combat.getId(), tourFind.get().getCombat().getId());
+		assertEquals(pokemon1.getNumero(), tourFind.get().getPokemonMatch1().getNumero());
+		assertEquals(pokemon2.getNumero(), tourFind.get().getPokemonMatch2().getNumero());  
 		
 		tourRepo.delete(tour);
 		combatRepo.delete(combat);
@@ -61,9 +65,7 @@ public class TestJUnitTour {
 	}
 	
 	@Test
-	public void tourUpdate() {
-		ITourRepository tourRepo = context.getBean(ITourRepository.class);
-		
+	public void tourUpdate() {		
 		Tour tour = new Tour();
 		tour.setActionJoueur1(Action.ATTAQUER);
 		tour.setActionJoueur2(Action.CHANGER);
@@ -81,17 +83,17 @@ public class TestJUnitTour {
 		
 		Optional<Tour> tourFind = tourRepo.findById(tour.getId());
 		
-		Assert.assertEquals(Action.CHANGER, tourFind.get().getActionJoueur1());
-		Assert.assertEquals(Action.ATTAQUER, tourFind.get().getActionJoueur2());
-		Assert.assertEquals("Abîme", tourFind.get().getAttaquePokemon1());
-		Assert.assertEquals("Abattage", tourFind.get().getAttaquePokemon2());
+		assertEquals(Action.CHANGER, tourFind.get().getActionJoueur1());
+		assertEquals(Action.ATTAQUER, tourFind.get().getActionJoueur2());
+		assertEquals("Abîme", tourFind.get().getAttaquePokemon1());
+		assertEquals("Abattage", tourFind.get().getAttaquePokemon2());
 		
 		tourRepo.delete(tour);
 	}
 	
 	@Test
 	public void tourFindAllAndDelete() {
-		ITourRepository tourRepo = context.getBean(ITourRepository.class);
+		int listSize = tourRepo.findAll().size();
 		
 		Tour tour1 = new Tour();
 		Tour tour2 = new Tour();
@@ -105,7 +107,7 @@ public class TestJUnitTour {
 		
 		List<Tour> tours = tourRepo.findAll();
 		
-		Assert.assertEquals(4, tours.size());  
+		assertEquals(listSize + 4, tours.size());  
 		tourRepo.delete(tour1);
 		tourRepo.delete(tour2);
 		tourRepo.delete(tour3);
@@ -113,6 +115,6 @@ public class TestJUnitTour {
 		
 		tours = tourRepo.findAll();
 		
-		Assert.assertEquals(0, tours.size());
+		assertEquals(listSize, tours.size());
 	}
 }

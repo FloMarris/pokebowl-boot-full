@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,7 +27,7 @@ public class Attaque {
 	private Long id;
 	@Version
 	@JsonView(Views.ViewAttaque.class)
-	private int version;
+	private int version; 
 	@Column(name="nom")
 	@JsonView(Views.ViewAttaque.class)
 	private String nom;
@@ -46,7 +47,7 @@ public class Attaque {
 	@Column(name="description", length = 255)
 	@JsonView(Views.ViewAttaque.class)
 	private String description;
-	@ManyToMany(mappedBy = "attaques")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "attaques")
 	private List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	@OneToOne
 	@JoinColumn(name = "type_attaque")

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -76,10 +77,10 @@ public class Pokemon {
 	@JsonView(Views.ViewCommon.class)
 	private String description;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "attaque_id"))
 	@JsonView(Views.ViewPokemonDetail.class)
-	private List<Attaque> attaques = new ArrayList<Attaque>();
+	private List<Attaque> attaques = new ArrayList<Attaque>(); 
 	
 	@OneToOne
 	@JoinColumn(name = "type1")
@@ -96,7 +97,7 @@ public class Pokemon {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public Pokemon(String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
 			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
 			String description) {
@@ -312,5 +313,7 @@ public class Pokemon {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+
+	
 	
 }

@@ -15,6 +15,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import sopra.pokebowl.model.Pokemon;
+import sopra.pokebowl.model.TypeClass;
+import sopra.pokebowl.model.TypeEnum;
 import sopra.pokebowl.model.Views;
 import sopra.pokebowl.repository.IPokemonRepository;
 
@@ -43,4 +45,23 @@ public class PokemonRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 	}
+	
+	@GetMapping("/by-types/{type1}/{type2}")
+	@JsonView(Views.ViewPokemon.class)
+	public List<Pokemon> findAllPokemonsByTypes(@PathVariable TypeEnum type1, @PathVariable TypeEnum type2) {
+		return pokemonRepo.findAllPokemonByType(type1, type2);
+	}
+	
+	@GetMapping("/by-types/{type1}")
+	@JsonView(Views.ViewPokemon.class)
+	public List<Pokemon> findAllPokemonsByType(@PathVariable TypeEnum type1) {
+		return pokemonRepo.findAllPokemonByType(type1);
+	}
+	
+	@GetMapping("/by-string/{begginingName}")
+	@JsonView(Views.ViewPokemon.class)
+	public List<Pokemon> findAllPokemonByString(@PathVariable String begginingName) {
+		return pokemonRepo.findAllPokemonByString(begginingName);
+	}
+		
 }
