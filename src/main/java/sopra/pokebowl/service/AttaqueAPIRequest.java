@@ -23,7 +23,7 @@ public class AttaqueAPIRequest {
 	public static final String pokemonAttaque = "pokemonAttaque";
 	
 	@SuppressWarnings("unlikely-arg-type")
-	public static Map<String, String> createAttaqueInfo(Integer i, List<String> listPoke) throws IOException {
+	public static Map<String, String> createAttaqueInfo(Integer i, Map<String, String> listPoke) throws IOException {
 		Map<String, String> attaqueInfo = new HashMap<String, String>();
 		
 		String path = "https://pokeapi.co/api/v2/move/" + i;
@@ -59,7 +59,6 @@ public class AttaqueAPIRequest {
 				}
 			}
 			
-
 			// Get Damage Class (catégorie attaque)
 			attaqueInfo.put(categorieAttaque, String.valueOf(attaque.damage_class.get("name")));
 
@@ -75,7 +74,6 @@ public class AttaqueAPIRequest {
 			// récupérer le type
 			attaqueInfo.put(typeAttaque, (String.valueOf(attaque.type.get("name")).replace("\"", "")));
 
-			// Utiliser une list de nom de pokemon faites avec les pokemons utilises
 			// Get Pokemons who can used Move			
 			StringBuilder pokemonMove = new StringBuilder();
 			for (int j = 0; j < attaque.learned_by_pokemon.size(); j++) {

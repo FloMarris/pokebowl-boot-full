@@ -42,7 +42,7 @@ public class Combat {
 	@OneToMany(mappedBy = "combat")
 	@JsonView(Views.ViewCombatDetail.class)
 	private List<PokemonMatch> pokemonMatchs = new ArrayList<PokemonMatch>();
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name = "equipe1")
 	@JsonView(Views.ViewCombatDetail.class)
 	private Equipe equipe1;
@@ -54,6 +54,10 @@ public class Combat {
 	
 	public Combat() {
 		super();
+	}
+	public Combat(Long idUtilisateurGagnant) {
+		super();
+		this.idUtilisateurGagnant = idUtilisateurGagnant;
 	}
 	public Combat(Long id, Long idUtilisateurGagnant) {
 		super();

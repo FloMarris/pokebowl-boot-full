@@ -1,11 +1,13 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import sopra.pokebowl.model.Combat;
 import sopra.pokebowl.model.Equipe;
@@ -18,14 +20,19 @@ import sopra.pokebowl.repository.IUtilisateurRepository;
 
 @SpringBootTest
 public class TestJUnitCombat {
-	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+	@Autowired
+	ICombatRepository combatRepo;
+	@Autowired
+	IEquipeRepository equipeRepo;
+	@Autowired
+	ISalonRepository salonRepo;
+	@Autowired
+	IUtilisateurRepository utilisateurRepo;
 	
 	@Test
 	public void combatCreate() {
-		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
-		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
-		ISalonRepository salonRepo = context.getBean(ISalonRepository.class);
-		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);
+		
 		
 		Utilisateur joueur1 = new Utilisateur();
 		Utilisateur joueur2 = new Utilisateur();
@@ -52,13 +59,13 @@ public class TestJUnitCombat {
 		
 		Combat combatFind = combatRepo.save(combat);
 		
-		Assert.assertEquals(salon.getId(), combatFind.getSalon().getId());
-		Assert.assertEquals(equipeJoueur1.getId(), combatFind.getEquipe1().getId());
-		Assert.assertEquals(equipeJoueur2.getId(), combatFind.getEquipe2().getId());
-		Assert.assertEquals(salon.getJoueur1().getId(), combatFind.getIdUtilisateurGagnant());
+		assertEquals(salon.getId(), combatFind.getSalon().getId());
+		assertEquals(equipeJoueur1.getId(), combatFind.getEquipe1().getId());
+		assertEquals(equipeJoueur2.getId(), combatFind.getEquipe2().getId());
+		assertEquals(salon.getJoueur1().getId(), combatFind.getIdUtilisateurGagnant());
 		
 		combatRepo.delete(combat);
-		
+		 
 		salonRepo.delete(salon);
 		utilisateurRepo.delete(joueur1);  
 		utilisateurRepo.delete(joueur2);
@@ -71,8 +78,6 @@ public class TestJUnitCombat {
 	
 	@Test
 	public void combatUpdate() {
-		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
-		
 		Combat combat = new Combat();
 		combat.setIdUtilisateurGagnant(45L);
 		
@@ -86,19 +91,19 @@ public class TestJUnitCombat {
 		
 		Optional<Combat> combatFind = combatRepo.findById(combat.getId());
 		
-		Assert.assertEquals((Long)12L, combatFind.get().getIdUtilisateurGagnant());
+		assertEquals((Long)12L, combatFind.get().getIdUtilisateurGagnant());
 		
 		combatRepo.delete(combat);
 	}
 	
 	@Test
 	public void combatFindAllAndDelete() {
-		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
+		int listSize = combatRepo.findAll().size();
 		
 		Combat combat1 = new Combat();
 		Combat combat2 = new Combat();
 		Combat combat3 = new Combat();
-		Combat combat4 = new Combat();
+		Combat combat4 = new Combat(); 
 		
 		combat1 = combatRepo.save(combat1);
 		combat2 = combatRepo.save(combat2);
@@ -107,7 +112,7 @@ public class TestJUnitCombat {
 		
 		List<Combat> combats = combatRepo.findAll();
 		
-		Assert.assertEquals(4, combats.size());
+		assertEquals(listSize + 4, combats.size());
 		
 		combatRepo.delete(combat1);
 		combatRepo.delete(combat2);
@@ -116,8 +121,7 @@ public class TestJUnitCombat {
 		
 		combats = combatRepo.findAll();
 		
-		Assert.assertEquals(0, combats.size());
-		
+		assertEquals(listSize, combats.size());	
 	}
 	
  }

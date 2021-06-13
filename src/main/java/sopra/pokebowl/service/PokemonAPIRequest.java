@@ -9,6 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.DocFlavor.STRING;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,7 +31,7 @@ public class PokemonAPIRequest {
 	public static final String type1Poke = "type1Poke";
 	public static final String type2Poke = "type2Poke";
 	
-	public static Map<String, String> createInfoPokemon(int i, String name, List<String> listPoke) throws IOException {
+	public static Map<String, String> createInfoPokemon(int i, String name, Map<String, String> listPoke) throws IOException {
 		Map<String, String> pokeInfo = new HashMap<String, String>();
 
 		// Get Pokemon by name or id
@@ -71,12 +73,24 @@ public class PokemonAPIRequest {
 
 		// Get Pokemon Id
 		pokeInfo.put("id", pokemon.id);
-
-		// Get Pokemon name
-		pokeInfo.put(nomPokeEN, String.valueOf(pokemon.name));
 		
-		listPoke.add(pokemon.name);
-
+		
+		
+		// Get Pokemon name (fr)
+		for(JsonNode j : pokemon2.names) {
+			if((String.valueOf(j.get("language").get("name"))).equals("\"fr\"")) {
+				StringBuilder nameBuilder = new StringBuilder(String.valueOf(j.get("name")));
+				nameBuilder.deleteCharAt(0);
+				nameBuilder.deleteCharAt(nameBuilder.length() - 1);
+				pokeInfo.put(nomPoke, nameBuilder.toString());
+				
+				// Get Pokemon name (en) --> pour faire les liens attaques et pokemons
+				listPoke.put(pokemon.name, nameBuilder.toString());
+				
+				break;
+			}
+		}
+		
 		// Get Pokemon stats
 		String[] stats = {hpPoke, attaquePoke, defensePoke, attaqueSpePoke, defenseSpePoke, speedPoke};
 		for (int j = 0; j < pokemon.stats.size(); j++) {
@@ -118,14 +132,6 @@ public class PokemonAPIRequest {
 			}
 		}
 		
-		//Get Pokemon French name
-		for(JsonNode j : pokemon2.names) {
-			if((String.valueOf(j.get("language").get("name"))).equals("\"fr\"")) {
-				pokeInfo.put(nomPoke, (String.valueOf(j.get("name"))).replace("\"", ""));
-				break;
-			}
-		}
-
 		return pokeInfo;
 	}
 }

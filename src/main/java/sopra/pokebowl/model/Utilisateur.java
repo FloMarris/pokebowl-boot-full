@@ -45,6 +45,10 @@ public class Utilisateur {
 //	@JsonView(Views.ViewUtilisateurDetail.class)
 	private Statistique statistique;
 	@OneToOne
+	@JoinColumn(name = "equipe_en_cours_id")
+	@JsonIgnore
+	private Equipe equipeEnCours;
+	@OneToOne
 	@JoinColumn(name = "derniere_equipe_id")
 //	@JsonView(Views.ViewUtilisateurDetail.class)
 	@JsonIgnore
@@ -169,6 +173,14 @@ public class Utilisateur {
 		this.roles = roles;
 	}
 	
+	public Equipe getEquipeEnCours() {
+		return equipeEnCours;
+	}
+
+	public void setEquipeEnCours(Equipe equipeEnCours) {
+		this.equipeEnCours = equipeEnCours;
+	}
+
 	public List<String> getStringRoles() {
 		List<String> stringRoles = new ArrayList<>();
 

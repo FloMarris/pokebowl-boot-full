@@ -1,4 +1,4 @@
-package sopra.pokebowl;
+package sopra.pokebowl.testRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,7 +9,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.CategorieAttaque;
@@ -21,7 +20,7 @@ import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.ITypeClassRepository;
 
 @SpringBootTest
-public class TestJUnitAttaque {
+public class TestJUnitAttaque { 
 	
 	@Autowired
 	IAttaqueRepository attaqueRepo;
@@ -32,6 +31,8 @@ public class TestJUnitAttaque {
 	
 	@Test
 	public void attaqueFindAllAndDelete() {
+		int listSize = attaqueRepo.findAll().size();
+		
 		Attaque a1 = new Attaque();
 		Attaque a2 = new Attaque();
 		
@@ -40,14 +41,15 @@ public class TestJUnitAttaque {
 		
 		List<Attaque> list = attaqueRepo.findAll();
 		
-		assertEquals(2, list.size());
+		
+		assertEquals(listSize + 2, list.size());  
 		
 		attaqueRepo.delete(a1);
 		attaqueRepo.delete(a2);
 		
 		list = attaqueRepo.findAll();
 		
-		assertEquals(0, list.size());
+		assertEquals(listSize, list.size());
 	}
 	
 	@Test

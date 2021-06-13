@@ -59,6 +59,18 @@ public class MonPokemon {
 	}
 	
 	public MonPokemon(Integer ordre, Equipe equipe, Pokemon pokeReference, Attaque attaque1, Attaque attaque2,
+			Attaque attaque3, Attaque attaque4) {
+		super();
+		this.ordre = ordre;
+		this.equipe = equipe;
+		this.pokeReference = pokeReference;
+		this.attaque1 = attaque1;
+		this.attaque2 = attaque2; 
+		this.attaque3 = attaque3;
+		this.attaque4 = attaque4;
+	}
+	
+	public MonPokemon(Integer ordre, Equipe equipe, Pokemon pokeReference, Attaque attaque1, Attaque attaque2,
 			Attaque attaque3, Attaque attaque4, PokemonMatch pokeMatch) {
 		super();
 		this.ordre = ordre;
