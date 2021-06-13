@@ -130,12 +130,9 @@ public class TestJUnitAPI {
 					}
 					
 					attaqueRepo.save(attaque);
-				
-					System.out.println("VALEUR : "+attaqueInfo.get(AttaqueAPIRequest.pokemonAttaque));
 					
 					String[] listPokeAyantAttaque = (attaqueInfo.get(AttaqueAPIRequest.pokemonAttaque)).split(",");
 					for(String s : listPokeAyantAttaque) {
-						System.out.println("ITEM : " + s);
 						Pokemon p = pokemonRepo.findByEnName(s);
 						if(p != null) {
 							p.getAttaques().add(attaque);

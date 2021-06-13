@@ -23,6 +23,9 @@ public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
 	@Query("select p from Pokemon p WHERE p.type1.type = :type1 AND p.type2.type = :type2")
 	List<Pokemon> findAllPokemonByType(@Param("type1") TypeEnum type1, @Param("type2") TypeEnum type2);
 	
+	@Query("select p from Pokemon p WHERE p.type1.type = :type1")
+	List<Pokemon> findAllPokemonByType(@Param("type1") TypeEnum type1);
+	
 	@Query("select p from Pokemon p WHERE p.nom LIKE CONCAT(:recherche,'%')")
 	List<Pokemon> findAllPokemonByString(@Param("recherche") String recherche);
 	
