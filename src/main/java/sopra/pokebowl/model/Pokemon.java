@@ -101,6 +101,24 @@ public class Pokemon {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Pokemon(String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
+			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
+			String description) {
+		super();
+		this.nom = nom;
+		this.hp = hp;
+		this.attaque = attaque;
+		this.defense = defense;
+		this.attaqueSpe = attaqueSpe;
+		this.defenseSpe = defenseSpe;
+		this.speed = speed;
+		this.taille = taille;
+		this.poids = poids;
+		this.generation = generation;
+		this.avatar = avatar;
+		this.description = description;
+	}
 
 	public Pokemon(String nom, String enName, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
 			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,

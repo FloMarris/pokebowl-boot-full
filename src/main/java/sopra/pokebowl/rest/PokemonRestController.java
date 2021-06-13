@@ -54,6 +54,12 @@ public class PokemonRestController {
 		return pokemonRepo.findAllPokemonByType(type1, type2);
 	}
 	
+	@GetMapping("/by-types/{type1}")
+	@JsonView(Views.ViewPokemon.class)
+	public List<Pokemon> findAllPokemonsByType(@PathVariable TypeEnum type1) {
+		return pokemonRepo.findAllPokemonByType(type1, null);
+	}
+	
 	@GetMapping("/by-string/{begginingName}")
 	@JsonView(Views.ViewPokemon.class)
 	public List<Pokemon> findAllPokemonByString(@PathVariable String begginingName) {
