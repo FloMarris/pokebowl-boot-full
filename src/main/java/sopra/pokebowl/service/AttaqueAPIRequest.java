@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -22,7 +20,6 @@ public class AttaqueAPIRequest {
 	public static final String typeAttaque = "typeAttaque";
 	public static final String pokemonAttaque = "pokemonAttaque";
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public static Map<String, String> createAttaqueInfo(Integer i, Map<String, String> listPoke) throws IOException {
 		Map<String, String> attaqueInfo = new HashMap<String, String>(); 
 		

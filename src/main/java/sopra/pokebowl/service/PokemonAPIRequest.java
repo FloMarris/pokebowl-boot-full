@@ -5,11 +5,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-
-import javax.print.DocFlavor.STRING;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -94,7 +90,7 @@ public class PokemonAPIRequest {
 		// Get Pokemon stats
 		String[] stats = {hpPoke, attaquePoke, defensePoke, attaqueSpePoke, defenseSpePoke, speedPoke};
 		for (int j = 0; j < pokemon.stats.size(); j++) {
-			LinkedHashMap<Object, Object> stat = (LinkedHashMap<Object, Object>) pokemon.stats.get(j);
+			JsonNode stat = pokemon.stats.get(j);
 			pokeInfo.put(stats[j], String.valueOf(stat.get("base_stat")));
 		}
 
@@ -110,9 +106,9 @@ public class PokemonAPIRequest {
 		String[] typesString = {type1Poke, type2Poke};
 		int count = 0;
 		for (int j = 0; j <= pokemon.types.size() - 1; j++) {
-			LinkedHashMap<Object, Object> types = (LinkedHashMap<Object, Object>) pokemon.types.get(j);
-			LinkedHashMap<Object, Object> type = (LinkedHashMap<Object, Object>) types.get("type");
-			pokeInfo.put(typesString[j], ((String) type.get("name")).replace("\"", ""));
+			JsonNode types = pokemon.types.get(j);
+			JsonNode type = types.get("type");
+			pokeInfo.put(typesString[j], String.valueOf(type.get("name")).replace("\"", ""));
 			count++;
 		}
 
