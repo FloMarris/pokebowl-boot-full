@@ -81,4 +81,23 @@ public class SalonRestController {
 	public void delete(@PathVariable Long id) {
 		salonRepo.deleteById(id);
 	}
+	
+	@GetMapping("/{id}/joueurs")
+	@JsonView(Views.ViewEquipeDetail2.class)
+	public Salon findSalonWithJoueur1EquipeEnCoursMonPokeAndPokeRef(@PathVariable Long id) {
+		Optional<Salon> optSalonWithJoueur1 = salonRepo.findSalonByIdWithJoueur1EquipeEnCoursMonPokemonAndPokemon(id);
+		Optional<Salon> optSalonWithJoueur2 = salonRepo.findSalonByIdWithJoueur2EquipeEnCoursMonPokemonAndPokemon(id);
+		
+		
+		
+		if (optSalonWithJoueur1.isPresent()) {
+			if(optSalonWithJoueur2.isPresent()) {
+				optSalonWithJoueur1.get().setJoueur2(optSalonWithJoueur2.get().getJoueur2());
+			}
+			
+			return optSalonWithJoueur1.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
 }

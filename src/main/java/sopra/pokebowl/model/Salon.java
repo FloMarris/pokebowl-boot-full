@@ -20,24 +20,24 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Salon {
 	@Id
 	@GeneratedValue
-	@JsonView(Views.ViewSalon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
-	@JsonView(Views.ViewSalon.class)
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name = "nom")
-	@JsonView(Views.ViewSalon.class)
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@Column(name = "mot_de_passe")
-	@JsonView(Views.ViewSalon.class)
+	@JsonView(Views.ViewCommon.class)
 	private String motDePasse;
 	@ManyToOne
 	@JoinColumn(name = "joueur1_id")
-	@JsonView(Views.ViewSalonDetail.class)
+	@JsonView(Views.ViewEquipeDetail2.class)
 	private Utilisateur joueur1;
 	@ManyToOne
 	@JoinColumn(name = "joueur2_id")
-	@JsonView(Views.ViewSalonDetail.class)
+	@JsonView(Views.ViewEquipeDetail2.class)
 	private Utilisateur joueur2;
 	@OneToMany(mappedBy = "salon")
 	@JsonView(Views.ViewSalonDetail.class)

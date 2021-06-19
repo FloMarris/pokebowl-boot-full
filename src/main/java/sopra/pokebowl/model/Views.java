@@ -5,6 +5,8 @@ public class Views {
 	
 	public static class ViewEquipe extends ViewCommon {}
 	public static class ViewEquipeDetail extends ViewEquipe {}
+	public static class ViewEquipeDetail1 extends ViewEquipeDetail {}
+	public static class ViewEquipeDetail2 extends ViewEquipeDetail {}
 	
 	public static class ViewMonPokemon extends ViewCommon {}
 	public static class ViewMonPokemonDetail extends ViewMonPokemon {}
