@@ -61,7 +61,7 @@ public class TestJUnitAttaque {
 		Float precisionAttaque = 100f;
 		String description = "Le lanceur charge l'ennemi et le percute de tout son poids.";
 			
-		Attaque a1 = new Attaque(nom, categorie, pointDePouvoir, puissance, precisionAttaque, description);
+		Attaque a1 = new Attaque(2222L, nom, categorie, pointDePouvoir, puissance, precisionAttaque, description);
 		
 		List<Pokemon> pokemons = new ArrayList<Pokemon>();
 		
@@ -118,7 +118,7 @@ public class TestJUnitAttaque {
 		Float precisionAttaque = 100f;
 		String description = "Le lanceur charge l'ennemi et le percute de tout son poids.";
 			
-		Attaque a = new Attaque(nom, categorie, pointDePouvoir, puissance, precisionAttaque, description);
+		Attaque a = new Attaque(3333L, nom, categorie, pointDePouvoir, puissance, precisionAttaque, description);
 		
 		a = attaqueRepo.save(a);
 		
