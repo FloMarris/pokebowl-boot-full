@@ -66,7 +66,7 @@ public class TestJUnitPokemon {
 		String avatar = null;
 		String description = "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.";
 		
-		Pokemon p1 = new Pokemon(nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
+		Pokemon p1 = new Pokemon(9999L, nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
 		
 		List<Attaque> attaques = new ArrayList<Attaque>();
 		
@@ -138,7 +138,7 @@ public class TestJUnitPokemon {
 		Integer generation = 1;
 		String avatar = null;
 		String description = "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.";
-		Pokemon p = new Pokemon(nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
+		Pokemon p = new Pokemon(9998L, nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
 		
 		p = pokemonRepo.save(p);
 		
@@ -168,7 +168,7 @@ public class TestJUnitPokemon {
 		Integer generation = 1;
 		String avatar = null;
 		String description = "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.";
-		Pokemon p = new Pokemon(nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
+		Pokemon p = new Pokemon(9997L, nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
 		
 		TypeClass type1 = new TypeClass(TypeEnum.PLANTE, null);
 		TypeClass type2 = new TypeClass(TypeEnum.POISON, null);
@@ -211,7 +211,7 @@ public class TestJUnitPokemon {
 		Integer generation2 = 1;
 		String avatar2 = null;
 		String description2 = "It spits out POISONPOWDER to immobilize the enemy and then finishes it with a spray of ACID.";
-		Pokemon p2 = new Pokemon(nom2, hp2, attaque2, defense2, attaqueSpe2, defenseSpe2, speed2, taille2, poids2, generation2, avatar2, description2);
+		Pokemon p2 = new Pokemon(9996L, nom2, hp2, attaque2, defense2, attaqueSpe2, defenseSpe2, speed2, taille2, poids2, generation2, avatar2, description2);
 		
 		p2.setType1(type1);
 		p2.setType2(type2);
@@ -248,7 +248,7 @@ public class TestJUnitPokemon {
 		Integer generation = 1;
 		String avatar = null;
 		String description = "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.";
-		Pokemon p = new Pokemon(nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
+		Pokemon p = new Pokemon(9995L, nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
 		
 		TypeClass type1 = new TypeClass(TypeEnum.PLANTE, null);
 		TypeClass type2 = new TypeClass(TypeEnum.POISON, null);
@@ -291,7 +291,7 @@ public class TestJUnitPokemon {
 		Integer generation2 = 1;
 		String avatar2 = null;
 		String description2 = "It spits out POISONPOWDER to immobilize the enemy and then finishes it with a spray of ACID.";
-		Pokemon p2 = new Pokemon(nom2, hp2, attaque2, defense2, attaqueSpe2, defenseSpe2, speed2, taille2, poids2, generation2, avatar2, description2);
+		Pokemon p2 = new Pokemon(9994L, nom2, hp2, attaque2, defense2, attaqueSpe2, defenseSpe2, speed2, taille2, poids2, generation2, avatar2, description2);
 		
 		p2.setType1(type1);
 		p2.setType2(type2);
@@ -316,7 +316,7 @@ public class TestJUnitPokemon {
 
 	@Test
 	public void testFindAllAttaquesPokemonById() {		
-		Pokemon p = new Pokemon("Rondoudou", (Integer)102, (Integer)56, (Integer)59, (Integer)87, (Integer)91, (Integer)121, 0.65F, 2.5F, (Integer)1, "http://Rondoudou", "Description Rondoudou");
+		Pokemon p = new Pokemon(9993L, "Rondoudou", (Integer)102, (Integer)56, (Integer)59, (Integer)87, (Integer)91, (Integer)121, 0.65F, 2.5F, (Integer)1, "http://Rondoudou", "Description Rondoudou");
 		
 		Attaque a1 = new Attaque();
 		a1.setNom("Attaque 1");

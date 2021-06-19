@@ -71,6 +71,7 @@ public class TestJUnitAPI {
 			for(int i = 1; i <= numberPokeToUse; i++) {
 				Map<String, String> pokemonInfo = PokemonAPIRequest.createInfoPokemon(i, null, listPoke);
 				Pokemon pokemon = new Pokemon();
+				pokemon.setId(Long.parseLong(pokemonInfo.get(PokemonAPIRequest.id)));
 				pokemon.setNom(pokemonInfo.get(PokemonAPIRequest.nomPoke));
 				pokemon.setHp(Integer.parseInt(pokemonInfo.get(PokemonAPIRequest.hpPoke)));
 				pokemon.setAttaque(Integer.parseInt(pokemonInfo.get(PokemonAPIRequest.attaquePoke)));
@@ -103,6 +104,8 @@ public class TestJUnitAPI {
 				
 				if(!attaqueInfo.isEmpty()) {
 					Attaque attaque = new Attaque();
+					
+					attaque.setId(Long.parseLong(attaqueInfo.get(AttaqueAPIRequest.id)));
 					
 					attaque.setNom(attaqueInfo.get(AttaqueAPIRequest.nomAttaque));
 					
