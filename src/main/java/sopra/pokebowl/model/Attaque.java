@@ -22,7 +22,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "Attaque")
 public class Attaque {
 	@Id
-	@GeneratedValue
 	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
@@ -62,9 +61,10 @@ public class Attaque {
 
 
 
-	public Attaque(String nom, CategorieAttaque categorie, Integer pointDePouvoir, Integer puissance,
+	public Attaque(Long id, String nom, CategorieAttaque categorie, Integer pointDePouvoir, Integer puissance,
 			Float precision, String description) {
 		super();
+		this.id = id;
 		this.nom = nom;
 		this.categorie = categorie;
 		this.pointDePouvoir = pointDePouvoir;

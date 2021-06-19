@@ -19,6 +19,7 @@ public class AttaqueAPIRequest {
 	public static final String descriptionAttaque = "descriptionAttaque";
 	public static final String typeAttaque = "typeAttaque";
 	public static final String pokemonAttaque = "pokemonAttaque";
+	public static final String id = "id";
 	
 	public static Map<String, String> createAttaqueInfo(Integer i, Map<String, String> listPoke) throws IOException {
 		Map<String, String> attaqueInfo = new HashMap<String, String>(); 
@@ -41,12 +42,11 @@ public class AttaqueAPIRequest {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonAttaque attaque = mapper.readValue(responseStream, JsonAttaque.class);
 
-		// TODO
 		// récupérer que les attaques avec un power > 0
-		if (String.valueOf(attaque.generation.get("name")).equals("\"generation-i\"")) {
+		if ((String.valueOf(attaque.generation.get("name")).equals("\"generation-i\"")) && attaque.power != null && Integer.parseInt(attaque.power)>0 ) {
 
 			// Get id
-			attaqueInfo.put("id", attaque.id);
+			attaqueInfo.put(id, String.valueOf(attaque.id));
 
 			// Get name
 			for(JsonNode j : attaque.names) {
