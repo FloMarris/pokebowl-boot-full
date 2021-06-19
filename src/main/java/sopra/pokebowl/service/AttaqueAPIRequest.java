@@ -41,9 +41,8 @@ public class AttaqueAPIRequest {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonAttaque attaque = mapper.readValue(responseStream, JsonAttaque.class);
 
-		// TODO
 		// récupérer que les attaques avec un power > 0
-		if (String.valueOf(attaque.generation.get("name")).equals("\"generation-i\"")) {
+		if ((String.valueOf(attaque.generation.get("name")).equals("\"generation-i\"")) && attaque.power != null && Integer.parseInt(attaque.power)>0 ) {
 
 			// Get id
 			attaqueInfo.put("id", attaque.id);
