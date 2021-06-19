@@ -26,6 +26,7 @@ public class PokemonAPIRequest {
 	public static final String descriptionPoke = "descriptionPoke";
 	public static final String type1Poke = "type1Poke";
 	public static final String type2Poke = "type2Poke";
+	public static final String id = "id";
 	
 	public static Map<String, String> createInfoPokemon(int i, String name, Map<String, String> listPoke) throws IOException {
 		Map<String, String> pokeInfo = new HashMap<String, String>();
@@ -68,7 +69,7 @@ public class PokemonAPIRequest {
 		JSonPokemonSpecies pokemon2 = mapper2.readValue(responseStream2, JSonPokemonSpecies.class);
 
 		// Get Pokemon Id
-		pokeInfo.put("id", pokemon.id);
+		pokeInfo.put(id, String.valueOf(pokemon.id));
 		
 		
 		

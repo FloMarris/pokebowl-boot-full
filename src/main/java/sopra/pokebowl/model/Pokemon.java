@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "Pokemon")
 public class Pokemon {
 	@Id
-	@GeneratedValue
 	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	
@@ -98,10 +97,11 @@ public class Pokemon {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Pokemon(String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
+	public Pokemon(Long id, String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
 			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
 			String description) {
 		super();
+		this.id = id;
 		this.nom = nom;
 		this.hp = hp;
 		this.attaque = attaque;

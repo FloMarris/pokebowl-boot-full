@@ -56,7 +56,7 @@ public class TestMVCAttaque {
 	@Test
 	@WithUserDetails("pokemonator")
 	public void attaquePost() throws Exception {
-		Attaque attaque = new Attaque("attaque 1", CategorieAttaque.PHYSIQUE, 12, 34, 0.9f, "grosse attaque");
+		Attaque attaque = new Attaque(1111L, "attaque 1", CategorieAttaque.PHYSIQUE, 12, 34, 0.9f, "grosse attaque");
 	
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonAttaque = mapper.writeValueAsString(attaque);
