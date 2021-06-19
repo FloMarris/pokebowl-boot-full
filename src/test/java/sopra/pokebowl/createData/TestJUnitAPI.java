@@ -24,7 +24,7 @@ import sopra.pokebowl.repository.ITypeClassRepository;
 @SpringBootTest
 public class TestJUnitAPI {
 	public final Integer numberPokeToUse = 151;
-	public final Integer numberAttaqueToUse = 200;
+	public final Integer numberAttaqueToUse = 165;
 	public Map<String, String> listPoke = new HashMap<String, String>();
 	public Map<String, TypeEnum> typesEnToEnum = new HashMap<String, TypeEnum>() {{
 		put("fire", TypeEnum.FEU);
