@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.MonPokemon;
 import sopra.pokebowl.model.Pokemon;
+import sopra.pokebowl.model.TypeClass;
 import sopra.pokebowl.model.TypeEnum;
 
 public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
@@ -19,8 +20,11 @@ public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
 	@Query("select p from Utilisateur u join u.derniereEquipe.listPokemons p where u.id = :id")
 	List<MonPokemon> findPokemonsEquipePrecedenteUtilisateur(@Param("id") Long id);
 	
-	@Query("select p from Pokemon p WHERE p.type1.type = :type1 AND p.type2.type = :type2")
+	@Query("select p from Pokemon p WHERE (p.type1.type = :type1 AND p.type2.type = :type2) OR (p.type2.type = :type1 AND p.type1.type = :type2)")
 	List<Pokemon> findAllPokemonByType(@Param("type1") TypeEnum type1, @Param("type2") TypeEnum type2);
+	
+	@Query("select p from Pokemon p left join fetch p.type2 t WHERE (p.type1.type = :type1) OR (t is not null and t.type = :type1)")
+	List<Pokemon> findAllPokemonByType(@Param("type1") TypeEnum type1);
 	
 	@Query("select p from Pokemon p WHERE p.nom LIKE CONCAT(:recherche,'%')")
 	List<Pokemon> findAllPokemonByString(@Param("recherche") String recherche);

@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -21,10 +19,10 @@ public class AttaqueAPIRequest {
 	public static final String descriptionAttaque = "descriptionAttaque";
 	public static final String typeAttaque = "typeAttaque";
 	public static final String pokemonAttaque = "pokemonAttaque";
+	public static final String id = "id";
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public static Map<String, String> createAttaqueInfo(Integer i, Map<String, String> listPoke) throws IOException {
-		Map<String, String> attaqueInfo = new HashMap<String, String>();
+		Map<String, String> attaqueInfo = new HashMap<String, String>(); 
 		
 		String path = "https://pokeapi.co/api/v2/move/" + i;
 
@@ -44,20 +42,16 @@ public class AttaqueAPIRequest {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonAttaque attaque = mapper.readValue(responseStream, JsonAttaque.class);
 
-		// TODO
 		// récupérer que les attaques avec un power > 0
-		if (String.valueOf(attaque.generation.get("name")).equals("\"generation-i\"")) {
+		if ((String.valueOf(attaque.generation.get("name")).equals("\"generation-i\"")) && attaque.power != null && Integer.parseInt(attaque.power)>0 ) {
 
 			// Get id
-			attaqueInfo.put("id", attaque.id);
+			attaqueInfo.put(id, String.valueOf(attaque.id));
 
 			// Get name
 			for(JsonNode j : attaque.names) {
 				if(String.valueOf(j.get("language").get("name")).equals("\"fr\"")) {
-					StringBuilder name = new StringBuilder(String.valueOf(j.get("name")));
-					name.deleteCharAt(0);
-					name.deleteCharAt(name.length() - 1);
-					attaqueInfo.put(nomAttaque, name.toString());
+					attaqueInfo.put(nomAttaque, (String.valueOf(j.get("name"))).replace("\"", ""));
 					break;
 				}
 			}
@@ -75,31 +69,23 @@ public class AttaqueAPIRequest {
 			attaqueInfo.put(precisionAttaque, attaque.accuracy);
 
 			// récupérer le type
-			attaqueInfo.put(typeAttaque, String.valueOf(attaque.type.get("name")));
+			attaqueInfo.put(typeAttaque, (String.valueOf(attaque.type.get("name")).replace("\"", "")));
 
 			// Get Pokemons who can used Move			
 			StringBuilder pokemonMove = new StringBuilder();
 			for (int j = 0; j < attaque.learned_by_pokemon.size(); j++) {
 				JsonNode pokemon = attaque.learned_by_pokemon.get(j);
-				
-				StringBuilder pokemonName = new StringBuilder(String.valueOf(pokemon.get("name")));
-				pokemonName.deleteCharAt(0);
-				pokemonName.deleteCharAt(pokemonName.length() - 1);
-				
-				if (listPoke.containsKey(pokemonName.toString())) {
-					pokemonMove.append(pokemonName.toString() + ",");
+				if (listPoke.containsKey(String.valueOf(pokemon.get("name")).replace("\"", ""))) {
+					pokemonMove.append(String.valueOf(pokemon.get("name")).replace("\"", "") + ",");
 				}
 			}
-
+			
 			attaqueInfo.put(pokemonAttaque, String.valueOf(pokemonMove));
 			
 			//Get Description
-			for(JsonNode j : attaque.flavor_text_entries) {
-				if(String.valueOf(j.get("language").get("name")).equals("\"fr\"")) {
-					StringBuilder description = new StringBuilder((String.valueOf(j.get("flavor_text"))).replace("\\n", " "));
-					description.deleteCharAt(0);
-					description.deleteCharAt(description.length() - 1);
-					attaqueInfo.put(descriptionAttaque, description.toString());
+			for(int j= attaque.flavor_text_entries.size()-1; j>=0; j--) {
+				if(String.valueOf(attaque.flavor_text_entries.get(j).get("language").get("name")).equals("\"fr\"")) {
+					attaqueInfo.put(descriptionAttaque, ((String.valueOf(attaque.flavor_text_entries.get(j).get("flavor_text"))).replace("\\n", " ")).replace("\"", ""));
 					break;
 				}
 				

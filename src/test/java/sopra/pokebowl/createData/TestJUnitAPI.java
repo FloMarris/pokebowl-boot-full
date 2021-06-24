@@ -1,7 +1,6 @@
 package sopra.pokebowl.createData;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,22 +15,52 @@ import sopra.pokebowl.service.PokemonAPIRequest;
 import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.CategorieAttaque;
 import sopra.pokebowl.model.Pokemon;
+import sopra.pokebowl.model.TypeClass;
+import sopra.pokebowl.model.TypeEnum;
 import sopra.pokebowl.repository.IAttaqueRepository;
 import sopra.pokebowl.repository.IPokemonRepository;
+import sopra.pokebowl.repository.ITypeClassRepository;
 
 @SpringBootTest
 public class TestJUnitAPI {
 	public final Integer numberPokeToUse = 151;
-	public final Integer numberAttaqueToUse = 200;
+	public final Integer numberAttaqueToUse = 165;
 	public Map<String, String> listPoke = new HashMap<String, String>();
+	public Map<String, TypeEnum> typesEnToEnum = new HashMap<String, TypeEnum>() {{
+		put("fire", TypeEnum.FEU);
+		put("grass", TypeEnum.PLANTE);
+		put("water", TypeEnum.EAU);
+		put("bug", TypeEnum.INSECTE);
+		put("steel", TypeEnum.ACIER);
+		put("normal", TypeEnum.NORMAL);
+		put("rock", TypeEnum.ROCHE);
+		put("ground", TypeEnum.SOL);
+		put("dragon", TypeEnum.DRAGON);
+		put("psychic", TypeEnum.PSY);
+		put("dark", TypeEnum.TENEBRE);
+		put("electric", TypeEnum.ELECTRIQUE);
+		put("ghost", TypeEnum.SPECTRE);
+		put("poison", TypeEnum.POISON);
+		put("fighting", TypeEnum.COMBAT);
+		put("ice", TypeEnum.GLACE);
+		put("fairy", TypeEnum.FEE);
+		put("flying", TypeEnum.VOL);
+	}};
 	
 	@Autowired
 	IPokemonRepository pokemonRepo;
 	@Autowired
 	IAttaqueRepository attaqueRepo;
+	@Autowired
+	ITypeClassRepository typeClassRepo;
 	
 	@Test
 	public void createAllData() {
+		for(TypeEnum t : TypeEnum.values()) {
+			TypeClass type = new TypeClass();
+			type.setType(t);
+			type = typeClassRepo.save(type);
+		}
 		createPokeDataBase();
 		createAttaqueDataBase(); 
 	}
@@ -42,6 +71,7 @@ public class TestJUnitAPI {
 			for(int i = 1; i <= numberPokeToUse; i++) {
 				Map<String, String> pokemonInfo = PokemonAPIRequest.createInfoPokemon(i, null, listPoke);
 				Pokemon pokemon = new Pokemon();
+				pokemon.setId(Long.parseLong(pokemonInfo.get(PokemonAPIRequest.id)));
 				pokemon.setNom(pokemonInfo.get(PokemonAPIRequest.nomPoke));
 				pokemon.setHp(Integer.parseInt(pokemonInfo.get(PokemonAPIRequest.hpPoke)));
 				pokemon.setAttaque(Integer.parseInt(pokemonInfo.get(PokemonAPIRequest.attaquePoke)));
@@ -54,6 +84,10 @@ public class TestJUnitAPI {
 				pokemon.setGeneration(1);
 				pokemon.setAvatar(pokemonInfo.get(PokemonAPIRequest.avatarPoke));
 				pokemon.setDescription(pokemonInfo.get(PokemonAPIRequest.descriptionPoke));
+				pokemon.setType1( typeClassRepo.findByType(typesEnToEnum.get(pokemonInfo.get(PokemonAPIRequest.type1Poke))) ) ;
+				if(pokemonInfo.get(PokemonAPIRequest.type2Poke) != null) {
+					pokemon.setType2( typeClassRepo.findByType(typesEnToEnum.get(pokemonInfo.get(PokemonAPIRequest.type2Poke))) ) ;
+				}
 				
 				pokemonRepo.save(pokemon);
 			}
@@ -70,6 +104,8 @@ public class TestJUnitAPI {
 				
 				if(!attaqueInfo.isEmpty()) {
 					Attaque attaque = new Attaque();
+					
+					attaque.setId(Long.parseLong(attaqueInfo.get(AttaqueAPIRequest.id)));
 					
 					attaque.setNom(attaqueInfo.get(AttaqueAPIRequest.nomAttaque));
 					
@@ -95,9 +131,9 @@ public class TestJUnitAPI {
 						attaque.setDescription(attaqueInfo.get(AttaqueAPIRequest.descriptionAttaque));
 					}
 					
-//					if(attaqueInfo.get(AttaqueAPIRequest.typeAttaque) != null) {
-//						attaque.setTypeAttaque();
-//					}
+					if(attaqueInfo.get(AttaqueAPIRequest.typeAttaque) != null) {
+						attaque.setTypeAttaque(typeClassRepo.findByType(typesEnToEnum.get(attaqueInfo.get(AttaqueAPIRequest.typeAttaque))));
+					}
 					
 					attaqueRepo.save(attaque);
 					

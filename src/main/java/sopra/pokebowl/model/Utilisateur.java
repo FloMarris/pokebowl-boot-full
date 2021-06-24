@@ -24,29 +24,30 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Utilisateur {
 	@Id
 	@GeneratedValue
-	@JsonView(Views.ViewUtilisateur.class)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
-	@JsonView(Views.ViewUtilisateur.class)
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name = "pseudo")
-	@JsonView(Views.ViewUtilisateur.class)
+	@JsonView(Views.ViewCommon.class)
 	private String pseudo;
 	@Column(name = "email")
-	@JsonView(Views.ViewUtilisateur.class)
+	@JsonView(Views.ViewCommon.class)
 	private String email;
 	@Column(name = "avatar")
-	@JsonView(Views.ViewUtilisateur.class)
+	@JsonView(Views.ViewCommon.class)
 	private String avatar;
 	@Column(name = "mot_de_passe")
-	@JsonView(Views.ViewUtilisateur.class)
+	@JsonView(Views.ViewCommon.class)
 	private String motDePasse;
 	@Embedded
 //	@JsonView(Views.ViewUtilisateurDetail.class)
 	private Statistique statistique;
 	@OneToOne
 	@JoinColumn(name = "equipe_en_cours_id")
-	@JsonIgnore
+	@JsonView(Views.ViewEquipeDetail2.class)
+//	@JsonIgnore
 	private Equipe equipeEnCours;
 	@OneToOne
 	@JoinColumn(name = "derniere_equipe_id")

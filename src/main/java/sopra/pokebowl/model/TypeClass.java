@@ -16,20 +16,20 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class TypeClass {
 	@Id
 	@GeneratedValue
-	@JsonView(Views.ViewTypeClass.class)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	
 	@Version
-	@JsonView(Views.ViewTypeClass.class)
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	
 	@Column(name="type")
 	@Enumerated(EnumType.STRING)
-	@JsonView(Views.ViewTypeClass.class)
+	@JsonView(Views.ViewCommon.class)
 	private TypeEnum type;
 	
 	@Column(name="avatar")
-	@JsonView(Views.ViewTypeClass.class)
+	@JsonView(Views.ViewCommon.class)
 	private String avatar;
 	
 	public TypeClass() {

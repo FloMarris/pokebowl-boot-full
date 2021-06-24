@@ -19,4 +19,14 @@ public interface IEquipeRepository extends JpaRepository<Equipe, Long> {
 	
 	@Query("select distinct e from Equipe e left join fetch e.listPokemons lp left join fetch lp.pokeReference p where e.utilisateurEquipeEnCours.id = :idutil")
 	Optional<Equipe> findEquipeEnCoursByUtilisateurId(@Param("idutil") Long id);
+
+	@Query("select distinct e from Equipe e "
+			+ "left join fetch e.listPokemons lp "
+			+ "left join fetch lp.pokeReference p "
+			+ "left join fetch lp.attaque1 "
+			+ "left join fetch lp.attaque2 "
+			+ "left join fetch lp.attaque3 "
+			+ "left join fetch lp.attaque4 "
+			+ "where e.id =:id ")
+	Optional<Equipe> findEquipeByIdWithMonPokePokemonAndAllAttaque(@Param("id") Long id);
 }

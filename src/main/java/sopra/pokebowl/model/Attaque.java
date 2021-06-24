@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,36 +22,35 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "Attaque")
 public class Attaque {
 	@Id
-	@GeneratedValue
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private int version; 
 	@Column(name="nom")
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@Enumerated(EnumType.STRING)
 	@Column(name="categorie", length=20)
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private CategorieAttaque categorie;
 	@Column(name="pointDePouvoir")
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer pointDePouvoir;
 	@Column(name="puissance")
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer puissance;
 	@Column(name="precision_attaque")
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private Float precisionAttaque;
 	@Column(name="description", length = 255)
-	@JsonView(Views.ViewAttaque.class)
+	@JsonView(Views.ViewCommon.class)
 	private String description;
-	@ManyToMany(mappedBy = "attaques")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "attaques")
 	private List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	@OneToOne
 	@JoinColumn(name = "type_attaque")
-	@JsonView(Views.ViewAttaqueDetail.class)
+	@JsonView(Views.ViewCommon.class)
 	private TypeClass typeAttaque;
 	
 	
@@ -61,9 +61,10 @@ public class Attaque {
 
 
 
-	public Attaque(String nom, CategorieAttaque categorie, Integer pointDePouvoir, Integer puissance,
+	public Attaque(Long id, String nom, CategorieAttaque categorie, Integer pointDePouvoir, Integer puissance,
 			Float precision, String description) {
 		super();
+		this.id = id;
 		this.nom = nom;
 		this.categorie = categorie;
 		this.pointDePouvoir = pointDePouvoir;
