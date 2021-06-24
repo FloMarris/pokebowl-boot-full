@@ -151,50 +151,50 @@ public class TestJUnitCreateFakeData {
 		e2User2 = equipeRepo.save(e2User2);
 		
 		// CREATE MONPOKEMON
-		MonPokemon poke1Equipe1User1 = new MonPokemon(1, e1User1, pokemonRepo.findById(1L + 18L).get(), attaqueRepo.findById(152L  + 18L).get(), 
-				attaqueRepo.findById(153L  + 18L).get(), attaqueRepo.findById(154L  + 18L).get(), attaqueRepo.findById(155L  + 18L).get());
-		poke1Equipe1User1 = monPokemonRepo.save(poke1Equipe1User1);
-		MonPokemon poke2Equipe1User1 = new MonPokemon(1, e1User1, pokemonRepo.findById(34L  + 18L).get(), attaqueRepo.findById(162L  + 18L).get(), 
-				attaqueRepo.findById(193L  + 18L).get(), attaqueRepo.findById(159L + 18L).get(), attaqueRepo.findById(158L + 18L).get());
-		poke2Equipe1User1 = monPokemonRepo.save(poke2Equipe1User1);
-		MonPokemon poke3Equipe1User1 = new MonPokemon(1, e1User1, pokemonRepo.findById(56L + 18L).get(), attaqueRepo.findById(152L + 18L).get(), 
-				attaqueRepo.findById(190L + 18L).get(), attaqueRepo.findById(174L + 18L).get(), attaqueRepo.findById(180L + 18L).get());
-		poke3Equipe1User1 = monPokemonRepo.save(poke3Equipe1User1);
-		
-		MonPokemon poke1Equipe1User2 = new MonPokemon(1, e1User2, pokemonRepo.findById(123L + 18L).get(), attaqueRepo.findById(152L + 18L).get(), 
-				attaqueRepo.findById(153L + 18L).get(), attaqueRepo.findById(154L + 18L).get(), attaqueRepo.findById(155L + 18L).get());
-		poke1Equipe1User2 = monPokemonRepo.save(poke1Equipe1User2);
-		MonPokemon poke2Equipe1User2 = new MonPokemon(1, e1User2, pokemonRepo.findById(99L + 18L).get(), attaqueRepo.findById(190L + 18L).get(), 
-				attaqueRepo.findById(210L + 18L).get(), attaqueRepo.findById(174L + 18L).get(), attaqueRepo.findById(159L + 18L).get());
-		poke2Equipe1User2 = monPokemonRepo.save(poke2Equipe1User2);
-		MonPokemon poke3Equipe1User2 = new MonPokemon(1, e1User2, pokemonRepo.findById(90L + 18L).get(), attaqueRepo.findById(152L + 18L).get(), 
-				attaqueRepo.findById(211L + 18L).get(), attaqueRepo.findById(212L + 18L).get(), attaqueRepo.findById(213L + 18L).get());
-		poke3Equipe1User2 = monPokemonRepo.save(poke3Equipe1User2);
+//		MonPokemon poke1Equipe1User1 = new MonPokemon(1, e1User1, pokemonRepo.findById(1L).get(), attaqueRepo.findById(12L).get(), 
+//				attaqueRepo.findById(1L).get(), attaqueRepo.findById(54L).get(), attaqueRepo.findById(90L).get());
+//		poke1Equipe1User1 = monPokemonRepo.save(poke1Equipe1User1);
+//		MonPokemon poke2Equipe1User1 = new MonPokemon(1, e1User1, pokemonRepo.findById(34L).get(), attaqueRepo.findById(13L).get(), 
+//				attaqueRepo.findById(83L).get(), attaqueRepo.findById(59L).get(), attaqueRepo.findById(58L).get());
+//		poke2Equipe1User1 = monPokemonRepo.save(poke2Equipe1User1);
+//		MonPokemon poke3Equipe1User1 = new MonPokemon(1, e1User1, pokemonRepo.findById(56L).get(), attaqueRepo.findById(52L).get(), 
+//				attaqueRepo.findById(90L).get(), attaqueRepo.findById(74L).get(), attaqueRepo.findById(80L).get());
+//		poke3Equipe1User1 = monPokemonRepo.save(poke3Equipe1User1);
+//		
+//		MonPokemon poke1Equipe1User2 = new MonPokemon(1, e1User2, pokemonRepo.findById(23L).get(), attaqueRepo.findById(52L).get(), 
+//				attaqueRepo.findById(53L).get(), attaqueRepo.findById(54L).get(), attaqueRepo.findById(55L).get());
+//		poke1Equipe1User2 = monPokemonRepo.save(poke1Equipe1User2);
+//		MonPokemon poke2Equipe1User2 = new MonPokemon(1, e1User2, pokemonRepo.findById(69L).get(), attaqueRepo.findById(50L).get(), 
+//				attaqueRepo.findById(10L).get(), attaqueRepo.findById(74L).get(), attaqueRepo.findById(19L).get());
+//		poke2Equipe1User2 = monPokemonRepo.save(poke2Equipe1User2);
+//		MonPokemon poke3Equipe1User2 = new MonPokemon(1, e1User2, pokemonRepo.findById(90L).get(), attaqueRepo.findById(12L).get(), 
+//				attaqueRepo.findById(21L).get(), attaqueRepo.findById(22L).get(), attaqueRepo.findById(23L).get());
+//		poke3Equipe1User2 = monPokemonRepo.save(poke3Equipe1User2);
 		
 		// CREATE POKEMON MATCH
-		PokemonMatch poke1MatchUser1 = new PokemonMatch();
-		poke1MatchUser1.setMonPokemon(poke1Equipe1User1);
-		poke1MatchUser1 = pokemonMatchRepo.save(poke1MatchUser1);
-		
-		PokemonMatch poke2MatchUser1 = new PokemonMatch();
-		poke2MatchUser1.setMonPokemon(poke2Equipe1User1);
-		poke2MatchUser1 = pokemonMatchRepo.save(poke2MatchUser1); 
-		
-		PokemonMatch poke3MatchUser1 = new PokemonMatch();
-		poke3MatchUser1.setMonPokemon(poke3Equipe1User1);
-		poke3MatchUser1 = pokemonMatchRepo.save(poke3MatchUser1);
-		
-		PokemonMatch poke1MatchUser2 = new PokemonMatch();
-		poke1MatchUser2.setMonPokemon(poke1Equipe1User1);
-		poke1MatchUser2 = pokemonMatchRepo.save(poke1MatchUser2);
-		
-		PokemonMatch poke2MatchUser2 = new PokemonMatch();
-		poke2MatchUser2.setMonPokemon(poke2Equipe1User2);
-		poke2MatchUser2 = pokemonMatchRepo.save(poke2MatchUser2);
-		
-		PokemonMatch poke3MatchUser2 = new PokemonMatch();
-		poke3MatchUser2.setMonPokemon(poke3Equipe1User2);
-		poke3MatchUser2 = pokemonMatchRepo.save(poke3MatchUser2);
+//		PokemonMatch poke1MatchUser1 = new PokemonMatch();
+//		poke1MatchUser1.setMonPokemon(poke1Equipe1User1);
+//		poke1MatchUser1 = pokemonMatchRepo.save(poke1MatchUser1);
+//		
+//		PokemonMatch poke2MatchUser1 = new PokemonMatch();
+//		poke2MatchUser1.setMonPokemon(poke2Equipe1User1);
+//		poke2MatchUser1 = pokemonMatchRepo.save(poke2MatchUser1); 
+//		
+//		PokemonMatch poke3MatchUser1 = new PokemonMatch();
+//		poke3MatchUser1.setMonPokemon(poke3Equipe1User1);
+//		poke3MatchUser1 = pokemonMatchRepo.save(poke3MatchUser1);
+//		
+//		PokemonMatch poke1MatchUser2 = new PokemonMatch();
+//		poke1MatchUser2.setMonPokemon(poke1Equipe1User1);
+//		poke1MatchUser2 = pokemonMatchRepo.save(poke1MatchUser2);
+//		
+//		PokemonMatch poke2MatchUser2 = new PokemonMatch();
+//		poke2MatchUser2.setMonPokemon(poke2Equipe1User2);
+//		poke2MatchUser2 = pokemonMatchRepo.save(poke2MatchUser2);
+//		
+//		PokemonMatch poke3MatchUser2 = new PokemonMatch();
+//		poke3MatchUser2.setMonPokemon(poke3Equipe1User2);
+//		poke3MatchUser2 = pokemonMatchRepo.save(poke3MatchUser2);
 		
 //		// LINK EQUIPE USER
 //		utilisateur1.setEquipeEnCours(e1User1);
