@@ -72,12 +72,12 @@ public class PokemonRestController {
 	}
 	
 	@GetMapping("/{id}/attaques")
-	@JsonView(Views.ViewMonPokemonDetail.class) 
-	public List<Attaque> findAllAttaqueAvailablebyPokemonId(@PathVariable Long id) {
-		Optional<List<Attaque>> optAttaques = attaqueRepo.findAllAttaquesAvaibleByMonPokemonId(id);
+	@JsonView(Views.ViewPokemonDetail.class) 
+	public Pokemon findPokemonWithAllAttaquesAvaible(@PathVariable Long id) {
+		Optional<Pokemon> optPokemon = pokemonRepo.findPokemonWithAllAttaqueAvaible(id);
 	
-		if(optAttaques.isPresent()) {
-			return optAttaques.get();
+		if(optPokemon.isPresent()) {
+			return optPokemon.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}

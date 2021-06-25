@@ -1,6 +1,7 @@
 package sopra.pokebowl.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -34,4 +35,7 @@ public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
 	
 	@Query("select p from Pokemon p where p.nom = :nom")
 	Pokemon findPokemonByNom(@Param("nom") String nom);
+	
+	@Query("select distinct p from Pokemon p left join fetch p.attaques where p.id = :id")
+	Optional<Pokemon> findPokemonWithAllAttaqueAvaible(@Param("id") Long id);
 }
