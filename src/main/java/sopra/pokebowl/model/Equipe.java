@@ -44,13 +44,13 @@ public class Equipe {
 	
 	@ManyToOne
 	@JoinColumn(name="id_utilisateur")
-	@JsonView(Views.ViewEquipeDetail.class)
+	@JsonView(Views.ViewEquipeDetail1.class)
 	private Utilisateur utilisateurEquipeSauv;
 	@OneToOne(mappedBy="derniereEquipe")
-	@JsonView(Views.ViewEquipeDetail.class)
+	@JsonView(Views.ViewEquipeDetail1.class)
 	private Utilisateur utilisateurDerniereEquipe;
 	@OneToOne(mappedBy="equipeEnCours")
-	@JsonView(Views.ViewEquipeDetail.class)
+	@JsonView(Views.ViewEquipeDetail1.class)
 	private Utilisateur utilisateurEquipeEnCours;
 	@OneToMany(mappedBy="equipe")
 	@JsonView(Views.ViewEquipeDetail.class)

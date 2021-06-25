@@ -101,7 +101,7 @@ public class UtilisateurRestController {
 	
 	// Dans page profil --> Afficher les sprites des pokemons de toutes les équipes sauvegardées
 	@GetMapping("/{id}/equipes")
-	@JsonView(Views.ViewEquipeDetail.class)
+	@JsonView(Views.ViewEquipeDetail1.class)
 	public List<Equipe> findAllEquipeByUtilisateur(@PathVariable Long id) {
 		
 		Optional<List<Equipe>> optUtilisateur = equipeRepo.findEquipesByUtilisateurId(id);
@@ -115,7 +115,7 @@ public class UtilisateurRestController {
 	}
 	
 	@GetMapping("/{id}/equipePrecedente")
-	@JsonView(Views.ViewEquipeDetail.class)
+	@JsonView(Views.ViewEquipeDetail1.class)
 	public Equipe findEquipePrecedenteByUtilisateur(@PathVariable Long id) {
 		
 		Optional<Equipe> optUtilisateur = equipeRepo.findEquipePrecedenteByUtilisateurId(id);
@@ -129,7 +129,7 @@ public class UtilisateurRestController {
 	}
 	
 	@GetMapping("/{id}/equipeEnCours")
-	@JsonView(Views.ViewEquipeDetail.class)
+	@JsonView(Views.ViewEquipeDetail1.class)
 	public Equipe findEquipeEnCoursByUtilisateur(@PathVariable Long id) {
 		
 		Optional<Equipe> optUtilisateur = equipeRepo.findEquipeEnCoursByUtilisateurId(id);
