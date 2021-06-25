@@ -83,12 +83,12 @@ public class Pokemon {
 	
 	@OneToOne
 	@JoinColumn(name = "type1")
-	@JsonView(Views.ViewPokemonDetail.class)
+	@JsonView(Views.ViewCommon.class)
 	private TypeClass type1;
 	
 	@OneToOne
 	@JoinColumn(name = "type2")
-	@JsonView(Views.ViewPokemonDetail.class)
+	@JsonView(Views.ViewCommon.class)
 	private TypeClass type2;
 	
 	
