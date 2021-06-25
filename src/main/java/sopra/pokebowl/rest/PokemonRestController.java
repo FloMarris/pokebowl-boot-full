@@ -37,7 +37,7 @@ public class PokemonRestController {
 	@GetMapping("")
 	@JsonView(Views.ViewPokemon.class)
 	public List<Pokemon> findAll() {
-		return pokemonRepo.findAll();
+		return pokemonRepo.findAllPokemonsWithTypes();
 	}
 	
 	@GetMapping("/{id}")

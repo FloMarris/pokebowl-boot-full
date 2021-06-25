@@ -17,6 +17,9 @@ public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
 //	@Query("select p.avatar from Pokemon p where p.nom = :nom")
 //	String findAvatarWithNom(@Param("nom") String nom);
 	
+	@Query("select p from Pokemon p left join fetch p.type1 left join fetch p.type2")
+	List<Pokemon> findAllPokemonsWithTypes();
+	
 	@Query("select p from Utilisateur u join u.derniereEquipe.listPokemons p where u.id = :id")
 	List<MonPokemon> findPokemonsEquipePrecedenteUtilisateur(@Param("id") Long id);
 	
