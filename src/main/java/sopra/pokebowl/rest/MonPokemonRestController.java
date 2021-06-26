@@ -40,7 +40,7 @@ public class MonPokemonRestController {
 	}
 
 	@GetMapping("/{id}")
-	@JsonView(Views.ViewMonPokemon.class)
+	@JsonView(Views.ViewMonPokemonDetail.class)
 	public MonPokemon find(@PathVariable Long id) {
 
 		Optional<MonPokemon> optMonPoke = monPokeRepo.findById(id);
