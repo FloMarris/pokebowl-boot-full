@@ -66,7 +66,7 @@ public class EquipeRestController {
 //	}
 
 	@PostMapping("")
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	public Equipe create(@Valid @RequestBody Equipe equipe, BindingResult result) {
 		if (result.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erreur validation");
@@ -85,6 +85,10 @@ public class EquipeRestController {
 		}
 
 		equipe = equipeRepo.save(equipe);
+		
+		System.out.println("##########");
+		System.out.println(equipe.getListPokemons().size());
+		System.out.println("##########");
 
 		return equipe;
 	}
