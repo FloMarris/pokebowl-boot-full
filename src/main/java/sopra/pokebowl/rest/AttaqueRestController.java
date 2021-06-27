@@ -61,4 +61,12 @@ public class AttaqueRestController {
 		
 		return attaque;
 	}
+	
+	@GetMapping("/pokemon/{id}")
+	@JsonView(Views.ViewAttaque.class)
+	public Optional<List<Attaque>> findAllAttaquesPokemon(@PathVariable Long id) {
+
+		return attaqueRepo.findAllAttaquesAvaibleByMonPokemonId(id);
+
+	}
 }
