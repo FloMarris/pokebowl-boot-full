@@ -19,4 +19,5 @@ public interface IMonPokemonRepository extends JpaRepository<MonPokemon, Long> {
 			+ "left join fetch m.attaque1 "
 			+ "where m.equipe.id = :id")
 	Optional<List<MonPokemon>> findMonPokemonWithPokemonWithEquipeId(@Param("id") Long id);
+	
 }

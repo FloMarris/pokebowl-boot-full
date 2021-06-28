@@ -40,7 +40,7 @@ public class EquipeRestController {
 	}
 
 	@GetMapping("/{id}")
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	public Equipe find(@PathVariable Long id) {
 
 		Optional<Equipe> optEquipe = equipeRepo.findById(id);
@@ -66,7 +66,7 @@ public class EquipeRestController {
 //	}
 
 	@PostMapping("")
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	public Equipe create(@Valid @RequestBody Equipe equipe, BindingResult result) {
 		if (result.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erreur validation");
@@ -78,13 +78,17 @@ public class EquipeRestController {
 	}
 
 	@PutMapping("/{id}")
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	public Equipe update(@RequestBody Equipe equipe, @PathVariable Long id) {
 		if (!equipeRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
 		equipe = equipeRepo.save(equipe);
+		
+		System.out.println("##########");
+		System.out.println(equipe.getListPokemons().size());
+		System.out.println("##########");
 
 		return equipe;
 	}
