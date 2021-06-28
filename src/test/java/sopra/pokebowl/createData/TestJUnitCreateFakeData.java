@@ -59,96 +59,145 @@ public class TestJUnitCreateFakeData {
 	public void CreateFakeDate() {
 		
 		// CREATE USERS
-		Statistique statistique1 = new Statistique("bulbizarre", 5, 18, 23); 
+//		Statistique statistique1 = new Statistique("bulbizarre", 5, 18, 23); 
+//		
+//		Utilisateur utilisateur1 = new Utilisateur();
+//		utilisateur1.setPseudo("pokemonator");
+//		utilisateur1.setEmail("jean.yves@gmail.com");
+//		utilisateur1.setAvatar("resources/images/avatar1.png");
+//		utilisateur1.setMotDePasse("lesoleilbrille33");
+//		utilisateur1.setStatistique(statistique1);
+//		utilisateur1.setEnable(true);
+//		utilisateur1 = utilisateurRepo.save(utilisateur1);
+//		
+//		UtilisateurRole u1Role = new UtilisateurRole(utilisateur1, Role.ADMIN);
+//		u1Role = utilisateurRoleRepo.save(u1Role);
+//		
+//		Statistique statistique2 = new Statistique("salamèche", 12, 10, 22);
+//		
+//		Utilisateur utilisateur2 = new Utilisateur();
+//		utilisateur2.setPseudo("francis");
+//		utilisateur2.setEmail("francis.lalane@gmail.com");
+//		utilisateur2.setAvatar("resources/images/avatar2.png");
+//		utilisateur2.setMotDePasse("33hfjskIO");
+//		utilisateur2.setStatistique(statistique2);
+//		utilisateur2 = utilisateurRepo.save(utilisateur2);
+//		
+//		UtilisateurRole u2Role = new UtilisateurRole(utilisateur2, Role.USER);
+//		u2Role = utilisateurRoleRepo.save(u2Role);
+//		
+//		Statistique statistique3 = new Statistique("chenipan", 23, 10, 33);
+//		
+//		Utilisateur utilisateur3 = new Utilisateur();
+//		utilisateur3.setPseudo("jeanjean");
+//		utilisateur3.setEmail("jean.valjean@hotmail.fr");
+//		utilisateur3.setAvatar("resources/images/avatar3.png");
+//		utilisateur3.setMotDePasse("lalalala");
+//		utilisateur3.setStatistique(statistique3);
+//		utilisateur3 = utilisateurRepo.save(utilisateur3);
+//		
+//		UtilisateurRole u3Role = new UtilisateurRole(utilisateur3, Role.USER);
+//		u3Role = utilisateurRoleRepo.save(u3Role);
+//		
+//		Statistique statistique4 = new Statistique("papilusion", 34, 3, 37);
+//		
+//		Utilisateur utilisateur4 = new Utilisateur();
+//		utilisateur4.setPseudo("mauricette");
+//		utilisateur4.setEmail("mauricette.momo@hotmail.com");
+//		utilisateur4.setAvatar("resources/images/avatar4.png");
+//		utilisateur4.setMotDePasse("motdepasse");
+//		utilisateur4.setStatistique(statistique4);
+//		utilisateur4 = utilisateurRepo.save(utilisateur4);
+//		
+//		UtilisateurRole u4Role = new UtilisateurRole(utilisateur4, Role.GUEST);
+//		u4Role = utilisateurRoleRepo.save(u4Role);
+//		
+//		// CREATE SALON
+//		Salon salon1 = new Salon("salon 1", "sal1");
+//		salon1 = salonRepo.save(salon1);
+//		
+//		Salon salon2 = new Salon("salon 2", "sal2");
+//		salon2 = salonRepo.save(salon2);
+//		
+//		// CREATE COMBAT
+//		Combat combat1 = new Combat(utilisateur1.getId());
+//		combat1 = combatRepo.save(combat1);
+//		Combat combat2 = new Combat(utilisateur2.getId());
+//		combat2 = combatRepo.save(combat2);
+//		Combat combat3 = new Combat(utilisateur1.getId());
+//		combat3 = combatRepo.save(combat3); 
+//
+//		// CREATE TOUR
+//		Tour tour1 =  new Tour(Action.ATTAQUER, Action.ATTAQUER, "attaque1", "attaque2");
+//		tour1 = tourRepo.save(tour1);
+//		Tour tour2 =  new Tour(Action.ATTAQUER, Action.CHANGER, "attaque2", "NULL");
+//		tour2 = tourRepo.save(tour2);
+//		Tour tour3 =  new Tour(Action.CHANGER, Action.ATTAQUER, "NULL", "attaque2");
+//		tour3 = tourRepo.save(tour3);
+//		Tour tour4 =  new Tour(Action.CHANGER, Action.CHANGER, "NULL", "NULL");
+//		tour4 = tourRepo.save(tour4);
+//		
+//		// CREATE EQUIPE
+//		Equipe e1User1 = new Equipe("equipe1 Pokemonator", false, 3);
+//		e1User1 = equipeRepo.save(e1User1);
+//		Equipe e2User1 = new Equipe("equipe2 Pokemonator", false, 3);
+//		e2User1 = equipeRepo.save(e2User1);
+//		Equipe e3User1 = new Equipe("equipe3 Pokemonator", true, 4);
+//		e3User1 = equipeRepo.save(e3User1);
+//		
+//		Equipe e1User2 = new Equipe("equipe1 Francis", false, 3);
+//		e1User2 = equipeRepo.save(e1User2);
+//		Equipe e2User2 = new Equipe("equipe2 Francis", true, 3);
+//		e2User2 = equipeRepo.save(e2User2);
 		
-		Utilisateur utilisateur1 = new Utilisateur();
-		utilisateur1.setPseudo("pokemonator");
-		utilisateur1.setEmail("jean.yves@gmail.com");
-		utilisateur1.setAvatar("resources/images/avatar1.png");
-		utilisateur1.setMotDePasse("lesoleilbrille33");
-		utilisateur1.setStatistique(statistique1);
-		utilisateur1.setEnable(true);
-		utilisateur1 = utilisateurRepo.save(utilisateur1);
 		
-		UtilisateurRole u1Role = new UtilisateurRole(utilisateur1, Role.ADMIN);
-		u1Role = utilisateurRoleRepo.save(u1Role);
+		MonPokemon p1 = new MonPokemon();
+		p1.setPokeReference(pokemonRepo.findById(1L).get());
+		p1.setAttaque1(attaqueRepo.findById(12L).get());
+		p1.setAttaque2(attaqueRepo.findById(14L).get());
+		p1.setAttaque3(attaqueRepo.findById(13L).get());
+		p1.setAttaque4(attaqueRepo.findById(18L).get());
+		p1 = monPokemonRepo.save(p1);
 		
-		Statistique statistique2 = new Statistique("salamèche", 12, 10, 22);
+		MonPokemon p2 = new MonPokemon();
+		p2.setPokeReference(pokemonRepo.findById(12L).get());
+		p2.setAttaque1(attaqueRepo.findById(19L).get());
+		p2.setAttaque2(attaqueRepo.findById(20L).get());
+		p2.setAttaque3(attaqueRepo.findById(21L).get());
+		p2.setAttaque4(attaqueRepo.findById(22L).get());
+		p2 = monPokemonRepo.save(p2);
 		
-		Utilisateur utilisateur2 = new Utilisateur();
-		utilisateur2.setPseudo("francis");
-		utilisateur2.setEmail("francis.lalane@gmail.com");
-		utilisateur2.setAvatar("resources/images/avatar2.png");
-		utilisateur2.setMotDePasse("33hfjskIO");
-		utilisateur2.setStatistique(statistique2);
-		utilisateur2 = utilisateurRepo.save(utilisateur2);
+		MonPokemon p5 = new MonPokemon();
+		p5.setPokeReference(pokemonRepo.findById(23L).get());
+		p5.setAttaque1(attaqueRepo.findById(16L).get());
+		p5.setAttaque2(attaqueRepo.findById(77L).get());
+		p5.setAttaque3(attaqueRepo.findById(4L).get());
+		p5.setAttaque4(attaqueRepo.findById(2L).get());
+		p5 = monPokemonRepo.save(p5);
 		
-		UtilisateurRole u2Role = new UtilisateurRole(utilisateur2, Role.USER);
-		u2Role = utilisateurRoleRepo.save(u2Role);
+		MonPokemon p6 = new MonPokemon();
+		p6.setPokeReference(pokemonRepo.findById(34L).get());
+		p6.setAttaque1(attaqueRepo.findById(89L).get());
+		p6.setAttaque2(attaqueRepo.findById(26L).get());
+		p6.setAttaque3(attaqueRepo.findById(41L).get());
+		p6.setAttaque4(attaqueRepo.findById(52L).get());
+		p6 = monPokemonRepo.save(p6);
 		
-		Statistique statistique3 = new Statistique("chenipan", 23, 10, 33);
+		MonPokemon p3 = new MonPokemon();
+		p3.setPokeReference(pokemonRepo.findById(123L).get());
+		p3.setAttaque1(attaqueRepo.findById(49L).get());
+		p3.setAttaque2(attaqueRepo.findById(10L).get());
+		p3.setAttaque3(attaqueRepo.findById(26L).get());
+		p3.setAttaque4(attaqueRepo.findById(24L).get());
+		p3 = monPokemonRepo.save(p3);
 		
-		Utilisateur utilisateur3 = new Utilisateur();
-		utilisateur3.setPseudo("jeanjean");
-		utilisateur3.setEmail("jean.valjean@hotmail.fr");
-		utilisateur3.setAvatar("resources/images/avatar3.png");
-		utilisateur3.setMotDePasse("lalalala");
-		utilisateur3.setStatistique(statistique3);
-		utilisateur3 = utilisateurRepo.save(utilisateur3);
-		
-		UtilisateurRole u3Role = new UtilisateurRole(utilisateur3, Role.USER);
-		u3Role = utilisateurRoleRepo.save(u3Role);
-		
-		Statistique statistique4 = new Statistique("papilusion", 34, 3, 37);
-		
-		Utilisateur utilisateur4 = new Utilisateur();
-		utilisateur4.setPseudo("mauricette");
-		utilisateur4.setEmail("mauricette.momo@hotmail.com");
-		utilisateur4.setAvatar("resources/images/avatar4.png");
-		utilisateur4.setMotDePasse("motdepasse");
-		utilisateur4.setStatistique(statistique4);
-		utilisateur4 = utilisateurRepo.save(utilisateur4);
-		
-		UtilisateurRole u4Role = new UtilisateurRole(utilisateur4, Role.GUEST);
-		u4Role = utilisateurRoleRepo.save(u4Role);
-		
-		// CREATE SALON
-		Salon salon1 = new Salon("salon 1", "sal1");
-		salon1 = salonRepo.save(salon1);
-		
-		Salon salon2 = new Salon("salon 2", "sal2");
-		salon2 = salonRepo.save(salon2);
-		
-		// CREATE COMBAT
-		Combat combat1 = new Combat(utilisateur1.getId());
-		combat1 = combatRepo.save(combat1);
-		Combat combat2 = new Combat(utilisateur2.getId());
-		combat2 = combatRepo.save(combat2);
-		Combat combat3 = new Combat(utilisateur1.getId());
-		combat3 = combatRepo.save(combat3); 
-
-		// CREATE TOUR
-		Tour tour1 =  new Tour(Action.ATTAQUER, Action.ATTAQUER, "attaque1", "attaque2");
-		tour1 = tourRepo.save(tour1);
-		Tour tour2 =  new Tour(Action.ATTAQUER, Action.CHANGER, "attaque2", "NULL");
-		tour2 = tourRepo.save(tour2);
-		Tour tour3 =  new Tour(Action.CHANGER, Action.ATTAQUER, "NULL", "attaque2");
-		tour3 = tourRepo.save(tour3);
-		Tour tour4 =  new Tour(Action.CHANGER, Action.CHANGER, "NULL", "NULL");
-		tour4 = tourRepo.save(tour4);
-		
-		// CREATE EQUIPE
-		Equipe e1User1 = new Equipe("equipe1 Pokemonator", false, 3);
-		e1User1 = equipeRepo.save(e1User1);
-		Equipe e2User1 = new Equipe("equipe2 Pokemonator", false, 3);
-		e2User1 = equipeRepo.save(e2User1);
-		Equipe e3User1 = new Equipe("equipe3 Pokemonator", true, 4);
-		e3User1 = equipeRepo.save(e3User1);
-		
-		Equipe e1User2 = new Equipe("equipe1 Francis", false, 3);
-		e1User2 = equipeRepo.save(e1User2);
-		Equipe e2User2 = new Equipe("equipe2 Francis", true, 3);
-		e2User2 = equipeRepo.save(e2User2);
+		MonPokemon p4 = new MonPokemon();
+		p4.setPokeReference(pokemonRepo.findById(90L).get());
+		p4.setAttaque1(attaqueRepo.findById(49L).get());
+		p4.setAttaque2(attaqueRepo.findById(50L).get());
+		p4.setAttaque3(attaqueRepo.findById(26L).get());
+		p4.setAttaque4(attaqueRepo.findById(23L).get());
+		p4 = monPokemonRepo.save(p4);
 		
 		// CREATE MONPOKEMON
 //		MonPokemon poke1Equipe1User1 = new MonPokemon(1, e1User1, pokemonRepo.findById(1L).get(), attaqueRepo.findById(12L).get(), 
