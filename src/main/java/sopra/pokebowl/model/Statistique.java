@@ -3,16 +3,22 @@ package sopra.pokebowl.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Embeddable
 public class Statistique {
 	
 	@Column(name="pokemon_prefere")
+	@JsonView(Views.ViewCommon.class)
 	private String pokemonPrefere;
 	@Column(name="nbr_victoires")
+	@JsonView(Views.ViewCommon.class)
 	private Integer nbrVictoires;
 	@Column(name="nbr_defaites")
+	@JsonView(Views.ViewCommon.class)
 	private Integer nbrDefaites;
 	@Column(name="nbr_parties_jouees")
+	@JsonView(Views.ViewCommon.class)
 	private Integer nbrPartiesJouees;
 	
 	public Statistique() {
