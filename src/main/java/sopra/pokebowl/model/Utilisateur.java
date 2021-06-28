@@ -42,7 +42,7 @@ public class Utilisateur {
 	@JsonView(Views.ViewCommon.class)
 	private String motDePasse;
 	@Embedded
-//	@JsonView(Views.ViewUtilisateurDetail.class)
+	@JsonView(Views.ViewCommon.class)
 	private Statistique statistique;
 	@OneToOne
 	@JoinColumn(name = "equipe_en_cours_id")
@@ -51,8 +51,8 @@ public class Utilisateur {
 	private Equipe equipeEnCours;
 	@OneToOne
 	@JoinColumn(name = "derniere_equipe_id")
-//	@JsonView(Views.ViewUtilisateurDetail.class)
-	@JsonIgnore
+	@JsonView(Views.ViewUtilisateur.class)
+//	@JsonIgnore
 	private Equipe derniereEquipe;
 	@OneToMany(mappedBy = "joueur1")
 //	@JsonView(Views.ViewUtilisateurDetail.class)
