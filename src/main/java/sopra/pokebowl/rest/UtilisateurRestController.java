@@ -159,14 +159,12 @@ public class UtilisateurRestController {
 	
 	@GetMapping("/by-pseudo/{pseudo}") 
 	@JsonView(Views.ViewUtilisateur.class)
-	
 	public Utilisateur findByPseudo(@PathVariable String pseudo) {
 		return utilisateurRepo.findByPseudo(pseudo);
 	}
 	
 	@GetMapping("/by-email/{email}") 
 	@JsonView(Views.ViewUtilisateur.class)
-	
 	public Utilisateur findByEmail(@PathVariable String email) {
 		return utilisateurRepo.findByEmail(email);
 	}
