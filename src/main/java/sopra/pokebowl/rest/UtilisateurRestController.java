@@ -69,6 +69,7 @@ public class UtilisateurRestController {
 		return utilisateur;  
 	}
 	
+	
 	@PutMapping("/{id}")
 	@JsonView(Views.ViewUtilisateur.class)
 	public Utilisateur update(@RequestBody Utilisateur utilisateur, @PathVariable Long id) {
@@ -151,21 +152,19 @@ public class UtilisateurRestController {
 		if (optUtilisateur.isPresent()) {
 			return optUtilisateur.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unable to find resource");
 		}
 		
 	}
 	
 	@GetMapping("/by-pseudo/{pseudo}") 
 	@JsonView(Views.ViewUtilisateur.class)
-	
 	public Utilisateur findByPseudo(@PathVariable String pseudo) {
 		return utilisateurRepo.findByPseudo(pseudo);
 	}
 	
 	@GetMapping("/by-email/{email}") 
 	@JsonView(Views.ViewUtilisateur.class)
-	
 	public Utilisateur findByEmail(@PathVariable String email) {
 		return utilisateurRepo.findByEmail(email);
 	}
