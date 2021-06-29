@@ -1,6 +1,7 @@
 package sopra.pokebowl.createData;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +47,27 @@ public class TestJUnitAPI {
 		put("fairy", TypeEnum.FEE);
 		put("flying", TypeEnum.VOL);
 	}};
+	public String[] avatarType = new String[] {
+			"https://www.pokepedia.fr/images/f/fc/Miniature_Type_Feu_EB.png",
+			"https://www.pokepedia.fr/images/3/35/Miniature_Type_Plante_EB.png",
+			"https://www.pokepedia.fr/images/4/4c/Miniature_Type_Eau_EB.png",
+			"https://www.pokepedia.fr/images/e/ee/Miniature_Type_Insecte_EB.png",
+			"https://www.pokepedia.fr/images/b/b9/Miniature_Type_Acier_EB.png",
+			"https://www.pokepedia.fr/images/2/2e/Miniature_Type_Normal_EB.png",
+			"https://www.pokepedia.fr/images/d/d3/Miniature_Type_Roche_EB.png",
+			"https://www.pokepedia.fr/images/d/d6/Miniature_Type_Sol_EB.png",
+			"https://www.pokepedia.fr/images/2/23/Miniature_Type_Dragon_EB.png",
+			"https://www.pokepedia.fr/images/d/da/Miniature_Type_Psy_EB.png",
+			"https://www.pokepedia.fr/images/f/f4/Miniature_Type_T%C3%A9n%C3%A8bres_EB.png",
+			"https://www.pokepedia.fr/images/6/6c/Miniature_Type_%C3%89lectrik_EB.png",
+			"https://www.pokepedia.fr/images/e/e5/Miniature_Type_Spectre_EB.png",
+			"https://www.pokepedia.fr/images/2/28/Miniature_Type_Poison_EB.png",
+			"https://www.pokepedia.fr/images/1/1c/Miniature_Type_Combat_EB.png",
+			"https://www.pokepedia.fr/images/7/7e/Miniature_Type_Glace_EB.png",
+			"https://www.pokepedia.fr/images/3/3e/Miniature_Type_F%C3%A9e_EB.png",
+			"https://www.pokepedia.fr/images/6/62/Miniature_Type_Vol_EB.png"
+	};
+	
 	
 	@Autowired
 	IPokemonRepository pokemonRepo;
@@ -56,13 +78,19 @@ public class TestJUnitAPI {
 	
 	@Test
 	public void createAllData() {
-		for(TypeEnum t : TypeEnum.values()) {
-			TypeClass type = new TypeClass();
-			type.setType(t);
+//		for(TypeEnum t : TypeEnum.values()) {
+//			TypeClass type = new TypeClass();
+//			type.setType(t);
+//			type.setAvatar("");
+//			type = typeClassRepo.save(type);
+//		}
+		for(int i=0; i<18; i++) {
+			TypeClass type = typeClassRepo.findById(Long.valueOf(i+1)).get();
+			type.setAvatar(avatarType[i]);
 			type = typeClassRepo.save(type);
 		}
-		createPokeDataBase();
-		createAttaqueDataBase(); 
+//		createPokeDataBase();
+//		createAttaqueDataBase(); 
 	}
 	
 	public void createPokeDataBase() {
