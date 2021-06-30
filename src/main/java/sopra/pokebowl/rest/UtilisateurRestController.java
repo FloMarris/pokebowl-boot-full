@@ -152,7 +152,7 @@ public class UtilisateurRestController {
 		if (optUtilisateur.isPresent()) {
 			return optUtilisateur.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unable to find resource");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Mot de passe ou pseudo invalide");
 		}
 		
 	}
